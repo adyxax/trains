@@ -1,0 +1,2135 @@
+{
+  "pagination": {
+    "start_page": 0,
+    "items_on_page": 10,
+    "items_per_page": 10,
+    "total_result": 10
+  },
+  "links": [
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_points/{stop_point.id}",
+      "type": "stop_point",
+      "rel": "stop_points",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/commercial_modes/{commercial_modes.id}",
+      "type": "commercial_modes",
+      "rel": "commercial_modes",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_area.id}",
+      "type": "stop_area",
+      "rel": "stop_areas",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/physical_modes/{physical_modes.id}",
+      "type": "physical_modes",
+      "rel": "physical_modes",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/routes/{route.id}",
+      "type": "route",
+      "rel": "routes",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/commercial_modes/{commercial_mode.id}",
+      "type": "commercial_mode",
+      "rel": "commercial_modes",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/vehicle_journeys/{vehicle_journey.id}",
+      "type": "vehicle_journey",
+      "rel": "vehicle_journeys",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/lines/{line.id}",
+      "type": "line",
+      "rel": "lines",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/physical_modes/{physical_mode.id}",
+      "type": "physical_mode",
+      "rel": "physical_modes",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/networks/{network.id}",
+      "type": "network",
+      "rel": "networks",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/stop_area:OCE:SA:87723502/departures",
+      "type": "first",
+      "templated": false
+    }
+  ],
+  "disruptions": [],
+  "notes": [],
+  "feed_publishers": [],
+  "departures": [
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886823",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886823",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886823F29029_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T131800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T131800",
+        "base_arrival_date_time": "20210218T131800",
+        "base_departure_date_time": "20210218T131800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "St-Etienne-Châteaucreux (Saint-Étienne)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886726",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886726",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-726000-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87726000"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87726000"
+              }
+            ],
+            "name": "St-Etienne-Châteaucreux",
+            "links": [],
+            "coord": {
+              "lat": "45.443382",
+              "lon": "4.399996"
+            },
+            "label": "St-Etienne-Châteaucreux (Saint-Étienne)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87726000"
+          },
+          "quality": 0,
+          "name": "St-Etienne-Châteaucreux (Saint-Étienne)",
+          "id": "stop_area:OCE:SA:87726000"
+        },
+        "name": "Ambérieu-en-Bugey vers St-Etienne-Châteaucreux (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "backward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87743716-87726000"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886726F35035_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87743716-87726000"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T134100",
+        "additional_informations": [],
+        "departure_date_time": "20210218T134100",
+        "base_arrival_date_time": "20210218T134100",
+        "base_departure_date_time": "20210218T134100",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886827",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886827",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886827F22022_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T141800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T141800",
+        "base_arrival_date_time": "20210218T141800",
+        "base_departure_date_time": "20210218T141800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "St-Etienne-Châteaucreux (Saint-Étienne)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886728",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886728",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-726000-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87726000"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87726000"
+              }
+            ],
+            "name": "St-Etienne-Châteaucreux",
+            "links": [],
+            "coord": {
+              "lat": "45.443382",
+              "lon": "4.399996"
+            },
+            "label": "St-Etienne-Châteaucreux (Saint-Étienne)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87726000"
+          },
+          "quality": 0,
+          "name": "St-Etienne-Châteaucreux (Saint-Étienne)",
+          "id": "stop_area:OCE:SA:87726000"
+        },
+        "name": "Ambérieu-en-Bugey vers St-Etienne-Châteaucreux (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "backward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87743716-87726000"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886728F16016_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87743716-87726000"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T144100",
+        "additional_informations": [],
+        "departure_date_time": "20210218T144100",
+        "base_arrival_date_time": "20210218T144100",
+        "base_departure_date_time": "20210218T144100",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886871",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886871",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886871F27027_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T151800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T151800",
+        "base_arrival_date_time": "20210218T151800",
+        "base_departure_date_time": "20210218T151800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886837",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886837",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886837F18018_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T161800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T161800",
+        "base_arrival_date_time": "20210218T161800",
+        "base_departure_date_time": "20210218T161800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "St-Etienne-Châteaucreux (Saint-Étienne)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886734",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886734",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-726000-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87726000"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87726000"
+              }
+            ],
+            "name": "St-Etienne-Châteaucreux",
+            "links": [],
+            "coord": {
+              "lat": "45.443382",
+              "lon": "4.399996"
+            },
+            "label": "St-Etienne-Châteaucreux (Saint-Étienne)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87726000"
+          },
+          "quality": 0,
+          "name": "St-Etienne-Châteaucreux (Saint-Étienne)",
+          "id": "stop_area:OCE:SA:87726000"
+        },
+        "name": "Ambérieu-en-Bugey vers St-Etienne-Châteaucreux (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "backward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87743716-87726000"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886734F19019_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87743716-87726000"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T164100",
+        "additional_informations": [],
+        "departure_date_time": "20210218T164100",
+        "base_arrival_date_time": "20210218T164100",
+        "base_departure_date_time": "20210218T164100",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886839",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886839",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886839F10010_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T164800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T164800",
+        "base_arrival_date_time": "20210218T164800",
+        "base_departure_date_time": "20210218T164800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886843",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886843",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-743716-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87743716"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87743716"
+              }
+            ],
+            "name": "Ambérieu-en-Bugey",
+            "links": [],
+            "coord": {
+              "lat": "45.954008",
+              "lon": "5.342313"
+            },
+            "label": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87743716"
+          },
+          "quality": 0,
+          "name": "Ambérieu-en-Bugey (Ambérieu-en-Bugey)",
+          "id": "stop_area:OCE:SA:87743716"
+        },
+        "name": "St-Etienne-Châteaucreux vers Ambérieu-en-Bugey (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "forward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87726000-87743716"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886843F24024_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87726000-87743716"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T171800",
+        "additional_informations": [],
+        "departure_date_time": "20210218T171800",
+        "base_arrival_date_time": "20210218T171800",
+        "base_departure_date_time": "20210218T171800",
+        "data_freshness": "base_schedule"
+      }
+    },
+    {
+      "display_informations": {
+        "direction": "St-Etienne-Châteaucreux (Saint-Étienne)",
+        "code": "",
+        "network": "SNCF",
+        "links": [],
+        "color": "000000",
+        "name": "St-Etienne - Lyon - Ambérieu",
+        "physical_mode": "Train régional / TER",
+        "headsign": "886738",
+        "label": "St-Etienne - Lyon - Ambérieu",
+        "equipments": [],
+        "text_color": "FFFFFF",
+        "trip_short_name": "886738",
+        "commercial_mode": "TER",
+        "description": ""
+      },
+      "stop_point": {
+        "commercial_modes": [
+          {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          }
+        ],
+        "name": "Crépieux-la-Pape",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "coord": {
+          "lat": "45.803921",
+          "lon": "4.892737"
+        },
+        "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+        "equipments": [],
+        "administrative_regions": [
+          {
+            "insee": "69286",
+            "name": "Rillieux-la-Pape",
+            "level": 8,
+            "coord": {
+              "lat": "45.823514",
+              "lon": "4.8994366"
+            },
+            "label": "Rillieux-la-Pape (69140)",
+            "id": "admin:fr:69286",
+            "zip_code": "69140"
+          }
+        ],
+        "fare_zone": {
+          "name": "0"
+        },
+        "id": "stop_point:OCE:SP:TrainTER-87723502",
+        "stop_area": {
+          "codes": [
+            {
+              "type": "CR-CI-CH",
+              "value": "0087-723502-00"
+            },
+            {
+              "type": "UIC8",
+              "value": "87723502"
+            },
+            {
+              "type": "external_code",
+              "value": "OCE87723502"
+            }
+          ],
+          "name": "Crépieux-la-Pape",
+          "links": [],
+          "coord": {
+            "lat": "45.803921",
+            "lon": "4.892737"
+          },
+          "label": "Crépieux-la-Pape (Rillieux-la-Pape)",
+          "administrative_regions": [
+            {
+              "insee": "69286",
+              "name": "Rillieux-la-Pape",
+              "level": 8,
+              "coord": {
+                "lat": "45.823514",
+                "lon": "4.8994366"
+              },
+              "label": "Rillieux-la-Pape (69140)",
+              "id": "admin:fr:69286",
+              "zip_code": "69140"
+            }
+          ],
+          "timezone": "Europe/Paris",
+          "id": "stop_area:OCE:SA:87723502"
+        }
+      },
+      "route": {
+        "direction": {
+          "embedded_type": "stop_area",
+          "stop_area": {
+            "codes": [
+              {
+                "type": "CR-CI-CH",
+                "value": "0087-726000-BV"
+              },
+              {
+                "type": "UIC8",
+                "value": "87726000"
+              },
+              {
+                "type": "external_code",
+                "value": "OCE87726000"
+              }
+            ],
+            "name": "St-Etienne-Châteaucreux",
+            "links": [],
+            "coord": {
+              "lat": "45.443382",
+              "lon": "4.399996"
+            },
+            "label": "St-Etienne-Châteaucreux (Saint-Étienne)",
+            "timezone": "Europe/Paris",
+            "id": "stop_area:OCE:SA:87726000"
+          },
+          "quality": 0,
+          "name": "St-Etienne-Châteaucreux (Saint-Étienne)",
+          "id": "stop_area:OCE:SA:87726000"
+        },
+        "name": "Ambérieu-en-Bugey vers St-Etienne-Châteaucreux (Train TER)",
+        "links": [],
+        "physical_modes": [
+          {
+            "id": "physical_mode:LocalTrain",
+            "name": "Train régional / TER"
+          }
+        ],
+        "is_frequence": "False",
+        "geojson": {
+          "type": "MultiLineString",
+          "coordinates": []
+        },
+        "direction_type": "backward",
+        "line": {
+          "code": "",
+          "name": "St-Etienne - Lyon - Ambérieu",
+          "links": [],
+          "color": "000000",
+          "geojson": {
+            "type": "MultiLineString",
+            "coordinates": []
+          },
+          "text_color": "FFFFFF",
+          "physical_modes": [
+            {
+              "id": "physical_mode:LocalTrain",
+              "name": "Train régional / TER"
+            }
+          ],
+          "codes": [],
+          "closing_time": "221200",
+          "opening_time": "053500",
+          "commercial_mode": {
+            "id": "commercial_mode:ter",
+            "name": "TER"
+          },
+          "id": "line:OCE:199"
+        },
+        "id": "route:OCE:199-TrainTER-87743716-87726000"
+      },
+      "links": [
+        {
+          "type": "line",
+          "id": "line:OCE:199"
+        },
+        {
+          "type": "vehicle_journey",
+          "id": "vehicle_journey:OCE:SN886738F27027_dst_1"
+        },
+        {
+          "type": "route",
+          "id": "route:OCE:199-TrainTER-87743716-87726000"
+        },
+        {
+          "type": "commercial_mode",
+          "id": "commercial_mode:ter"
+        },
+        {
+          "type": "physical_mode",
+          "id": "physical_mode:LocalTrain"
+        },
+        {
+          "type": "network",
+          "id": "network:sncf"
+        }
+      ],
+      "stop_date_time": {
+        "links": [],
+        "arrival_date_time": "20210218T174100",
+        "additional_informations": [],
+        "departure_date_time": "20210218T174100",
+        "base_arrival_date_time": "20210218T174100",
+        "base_departure_date_time": "20210218T174100",
+        "data_freshness": "base_schedule"
+      }
+    }
+  ],
+  "context": {
+    "timezone": "Europe/Paris",
+    "current_datetime": "20210218T125549"
+  },
+  "exceptions": []
+}
