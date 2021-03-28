@@ -1,4 +1,4 @@
-package api
+package navitia_api_client
 
 import (
 	"encoding/json"
