@@ -20,7 +20,7 @@ func TestGetDepartures(t *testing.T) {
 		t.Fatalf("unreachable server should raise an error")
 	}
 	// invalid json
-	client, ts := NewTestClientFromFilename(t, "invalid.json")
+	client, ts := NewTestClientFromFilename(t, "test_data/invalid.json")
 	defer ts.Close()
 	_, err = client.GetDepartures()
 	if err == nil {
@@ -36,7 +36,7 @@ func TestGetDepartures(t *testing.T) {
 		t.Fatalf("404 should raise an error")
 	}
 	// normal working request
-	client, ts = NewTestClientFromFilename(t, "normal-crepieux.json")
+	client, ts = NewTestClientFromFilename(t, "test_data/normal-crepieux.json")
 	defer ts.Close()
 	departures, err := client.GetDepartures()
 	if err != nil {
