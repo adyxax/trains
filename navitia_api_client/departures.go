@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"time"
 )
 
 type DeparturesResponse struct {
@@ -43,7 +44,16 @@ type DeparturesResponse struct {
 }
 
 func (c *Client) GetDepartures() (departures *DeparturesResponse, err error) {
-	req, err := http.NewRequest("GET", fmt.Sprintf("%s/coverage/sncf/stop_areas/stop_area:SNCF:87723502/departures", c.baseURL), nil)
+	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/stop_area:SNCF:87723502/departures", c.baseURL)
+	start := time.Now()
+	c.mutex.Lock()
+	defer c.mutex.Unlock()
+	if cachedResult, ok := c.cache[request]; ok {
+		if start.Sub(cachedResult.ts) < 60*1000*1000*1000 {
+			return cachedResult.result.(*DeparturesResponse), nil
+		}
+	}
+	req, err := http.NewRequest("GET", request, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +64,10 @@ func (c *Client) GetDepartures() (departures *DeparturesResponse, err error) {
 	defer resp.Body.Close()
 	if err = json.NewDecoder(resp.Body).Decode(&departures); err != nil {
 		return nil, err
+	}
+	c.cache[request] = cachedResult{
+		ts:     start,
+		result: departures,
 	}
 	return
 }

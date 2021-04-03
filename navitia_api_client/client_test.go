@@ -13,6 +13,7 @@ func NewTestClient(ts *httptest.Server) *Client {
 	return &Client{
 		baseURL:    fmt.Sprintf(ts.URL),
 		httpClient: ts.Client(),
+		cache:      make(map[string]cachedResult),
 	}
 }
 

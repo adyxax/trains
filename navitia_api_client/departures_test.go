@@ -45,4 +45,13 @@ func TestGetDepartures(t *testing.T) {
 	if len(departures.Departures) != 10 {
 		t.Fatalf("did not decode normal-crepieux departures properly, got %d departures when expected 10", len(departures.Departures))
 	}
+	// test the cache (assuming the test takes less than 60 seconds (and it really should) it will be accurate)
+	ts.Close()
+	departures, err = client.GetDepartures()
+	if err != nil {
+		t.Fatalf("could not get normal-crepieux departures : %s", err)
+	}
+	if len(departures.Departures) != 10 {
+		t.Fatalf("did not decode normal-crepieux departures properly, got %d departures when expected 10", len(departures.Departures))
+	}
 }

@@ -3,12 +3,21 @@ package navitia_api_client
 import (
 	"fmt"
 	"net/http"
+	"sync"
 	"time"
 )
 
 type Client struct {
 	baseURL    string
 	httpClient *http.Client
+
+	mutex sync.Mutex
+	cache map[string]cachedResult
+}
+
+type cachedResult struct {
+	ts     time.Time
+	result interface{}
 }
 
 func NewClient(token string) *Client {
@@ -17,5 +26,6 @@ func NewClient(token string) *Client {
 		httpClient: &http.Client{
 			Timeout: time.Minute,
 		},
+		cache: make(map[string]cachedResult),
 	}
 }
