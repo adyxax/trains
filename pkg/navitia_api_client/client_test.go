@@ -9,7 +9,7 @@ import (
 )
 
 // package utilities
-func NewTestClient(ts *httptest.Server) *Client {
+func newTestClient(ts *httptest.Server) *Client {
 	return &Client{
 		baseURL:    fmt.Sprintf(ts.URL),
 		httpClient: ts.Client(),
@@ -17,7 +17,7 @@ func NewTestClient(ts *httptest.Server) *Client {
 	}
 }
 
-func NewTestClientFromFilename(t *testing.T, filename string) (*Client, *httptest.Server) {
+func newTestClientFromFilename(t *testing.T, filename string) (*Client, *httptest.Server) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		page, err := ioutil.ReadFile(filename)
 		if err != nil {
@@ -25,7 +25,7 @@ func NewTestClientFromFilename(t *testing.T, filename string) (*Client, *httptes
 		}
 		w.Write(page)
 	}))
-	return NewTestClient(ts), ts
+	return newTestClient(ts), ts
 }
 
 // tests
