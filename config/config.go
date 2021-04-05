@@ -5,7 +5,6 @@ import (
 	"os"
 	"regexp"
 
-	"github.com/pkg/errors"
 	"gopkg.in/yaml.v3"
 )
 
@@ -23,16 +22,16 @@ func (c *Config) validate() error {
 	// address
 	if ip := net.ParseIP(c.Address); ip == nil {
 		if _, err := net.LookupIP(c.Address); err != nil {
-			return errors.New("Invalid address " + c.Address + ", it must be a valid ipv4 address, ipv6 address, or resolvable name.")
+			return newInvalidAddressError(c.Address, err)
 		}
 	}
 	// port
 	if _, err := net.LookupPort("tcp", c.Port); err != nil {
-		return errors.New("Invalid port " + c.Port + ", it must be a valid port number or tcp service name. Got error : " + err.Error())
+		return newInvalidPortError(c.Port, err)
 	}
 	// token
 	if ok := validToken.MatchString(c.Token); !ok {
-		return errors.New("Invalid token, must be an hexadecimal string that lookslike 12345678-9abc-def0-1234-56789abcdef0, got " + c.Token + " instead.")
+		return newInvalidTokenError(c.Token)
 	}
 	return nil
 }
@@ -42,15 +41,15 @@ func LoadFile(path string) (*Config, error) {
 	var c *Config
 	f, errOpen := os.Open(path)
 	if errOpen != nil {
-		return nil, errors.Wrapf(errOpen, "Failed to open configuration file %s", path)
+		return nil, newOpenError(path, errOpen)
 	}
 	defer f.Close()
 	decoder := yaml.NewDecoder(f)
 	if err := decoder.Decode(&c); err != nil {
-		return nil, errors.Wrap(err, "Failed to decode configuration file")
+		return nil, newDecodeError(path, err)
 	}
 	if err := c.validate(); err != nil {
-		return nil, errors.Wrap(err, "Failed to validate configuration")
+		return nil, err
 	}
 	return c, nil
 }
