@@ -19,7 +19,7 @@ func TestLoadFile(t *testing.T) {
 	// Minimal yaml file with hostname resolving
 	minimalConfigWithResolving := Config{
 		Address: "localhost",
-		Port:    "8082",
+		Port:    "www",
 		Token:   "12345678-9abc-def0-1234-56789abcdef0",
 	}
 
