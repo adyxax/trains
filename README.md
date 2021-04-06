@@ -38,6 +38,11 @@ trainStop: stop_area:SNCF:87723502
 
 You can get a free token from the [official SNCF's website](https://www.digital.sncf.com/startup/api/token-developpeur) for up to 5000 requests per day.
 
+For now you can get the trainStop codes by manually parsing queries like the following. It is quite horrible but with a bit of perseverance you will find the stop code you want :
+```
+for i in `seq 4`; do curl 'https://TOKEN@api.sncf.com/v1/coverage/sncf/stop_areas?count=1000&start_page='$i |jq > $i.json; done
+```
+
 ## Usage
 
 Launching the webui server is as simple as :
