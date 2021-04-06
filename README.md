@@ -2,6 +2,8 @@
 
 Trains is a simple web app to display train timetables for specific lines at stations on France SNCF's network. It records weekly passages and you can subscribe to certain train times to alert when schedules change or your stop is removed. It queries the SNCF official api by default but will work with any compatible Navitia api implementation and present the results in a minimal web page that loads fast (unlike the official sites with all their images and ads).
 
+Api queries are cached for 60 seconds so that someone refreshing your instance cannot simply DOS the api and exhaust your request quota.
+
 A personal instance runs at https://trains.adyxax.org/.
 
 ## Content
