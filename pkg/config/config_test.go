@@ -11,16 +11,18 @@ import (
 func TestLoadFile(t *testing.T) {
 	// Minimal yaml file
 	minimalConfig := Config{
-		Address: "127.0.0.2",
-		Port:    "8082",
-		Token:   "12345678-9abc-def0-1234-56789abcdef0",
+		Address:   "127.0.0.2",
+		Port:      "8082",
+		Token:     "12345678-9abc-def0-1234-56789abcdef0",
+		TrainStop: "ABCD:test:01",
 	}
 
 	// Minimal yaml file with hostname resolving
 	minimalConfigWithResolving := Config{
-		Address: "localhost",
-		Port:    "www",
-		Token:   "12345678-9abc-def0-1234-56789abcdef0",
+		Address:   "localhost",
+		Port:      "www",
+		Token:     "12345678-9abc-def0-1234-56789abcdef0",
+		TrainStop: "VWXY_Z:test:90",
 	}
 
 	// Test cases
@@ -36,6 +38,7 @@ func TestLoadFile(t *testing.T) {
 		{"Unresolvable address should fail to load", "test_data/invalid_address_unresolvable.yaml", nil, &InvalidAddressError{}},
 		{"Invalid port should fail to load", "test_data/invalid_port.yaml", nil, &InvalidPortError{}},
 		{"Invalid token should fail to load", "test_data/invalid_token.yaml", nil, &InvalidTokenError{}},
+		{"Invalid trainStop should fail to load", "test_data/invalid_trainStop.yaml", nil, &InvalidTrainStopError{}},
 		{"Minimal config", "test_data/minimal.yaml", &minimalConfig, nil},
 		{"Minimal config with resolving", "test_data/minimal_with_hostname.yaml", &minimalConfigWithResolving, nil},
 	}

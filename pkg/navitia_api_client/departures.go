@@ -43,8 +43,8 @@ type DeparturesResponse struct {
 	} `json:"context"`
 }
 
-func (c *Client) GetDepartures() (departures *DeparturesResponse, err error) {
-	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/stop_area:SNCF:87723502/departures", c.baseURL)
+func (c *Client) GetDepartures(trainStop string) (departures *DeparturesResponse, err error) {
+	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/%s/departures", c.baseURL, trainStop)
 	start := time.Now()
 	c.mutex.Lock()
 	defer c.mutex.Unlock()

@@ -17,4 +17,6 @@ func TestErrorsCoverage(t *testing.T) {
 	_ = invalidPortErr.Unwrap()
 	invalidTokenErr := InvalidTokenError{}
 	_ = invalidTokenErr.Error()
+	invalidTrainStopErr := InvalidTrainStopError{}
+	_ = invalidTrainStopErr.Error()
 }

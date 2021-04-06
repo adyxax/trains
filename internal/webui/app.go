@@ -14,6 +14,9 @@ import (
 // the api client object
 var client *navitia_api_client.Client
 
+// the webui configuration
+var conf *config.Config
+
 //go:embed html/*
 var templatesFS embed.FS
 
@@ -35,7 +38,7 @@ type Departure struct {
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
 		var p Page
-		if d, err := client.GetDepartures(); err != nil {
+		if d, err := client.GetDepartures(conf.TrainStop); err != nil {
 			log.Printf("%+v\n%s\n", d, err)
 		} else {
 			for i := 0; i < len(d.Departures); i++ {
@@ -64,6 +67,7 @@ func renderTemplate(w http.ResponseWriter, tmpl string, p Page) {
 }
 
 func Run(c *config.Config) {
+	conf = c
 	client = navitia_api_client.NewClient(c.Token)
 	http.Handle("/static/", http.FileServer(http.FS(staticFS)))
 	http.HandleFunc("/", rootHandler)

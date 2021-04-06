@@ -9,13 +9,17 @@ import (
 )
 
 var validToken = regexp.MustCompile(`^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$`)
+var validTrainStop = regexp.MustCompile(`^[a-zA-Z0-9:_]+$`)
 
 type Config struct {
 	// Address is the hostname or ip the web server will listen to
 	Address string `yaml:"address",default:"127.0.0.1"`
-	Port    string `yaml:"port",default:"8080"`
+	// Port is the tcp port number or service name the web server will listen to
+	Port string `yaml:"port",default:"8080"`
 	// Token is the sncf api token
 	Token string `yaml:"token"`
+	// TrainStop is the navitia code of the train stop the webapp will monitor
+	TrainStop string `yaml:"trainStop"`
 }
 
 func (c *Config) validate() error {
@@ -32,6 +36,10 @@ func (c *Config) validate() error {
 	// token
 	if ok := validToken.MatchString(c.Token); !ok {
 		return newInvalidTokenError(c.Token)
+	}
+	// TrainStop
+	if ok := validTrainStop.MatchString(c.TrainStop); !ok {
+		return newInvalidTrainStopError(c.TrainStop)
 	}
 	return nil
 }

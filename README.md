@@ -31,6 +31,7 @@ The default configuration file location is `$HOME/.config/trains/config.yaml`. I
 address: 127.0.0.1
 port: 8082
 token: 12345678-9abc-def0-1234-56789abcdef0
+trainStop: stop_area:SNCF:87723502
 ```
 
 `address` can be any ipv4 or ipv6 address or a hostname that resolves to such address, `port` can be any valid tcp port number or service name.
