@@ -11,8 +11,8 @@ import (
 func TestLoadFile(t *testing.T) {
 	// Minimal yaml file
 	minimalConfig := Config{
-		Address:   "127.0.0.2",
-		Port:      "8082",
+		Address:   "127.0.0.1",
+		Port:      "8080",
 		Token:     "12345678-9abc-def0-1234-56789abcdef0",
 		TrainStop: "ABCD:test:01",
 	}
@@ -23,6 +23,14 @@ func TestLoadFile(t *testing.T) {
 		Port:      "www",
 		Token:     "12345678-9abc-def0-1234-56789abcdef0",
 		TrainStop: "VWXY_Z:test:90",
+	}
+
+	// Complete yaml file
+	completeConfig := Config{
+		Address:   "127.0.0.2",
+		Port:      "8082",
+		Token:     "12345678-9abc-def0-1234-56789abcdef0",
+		TrainStop: "ABCD:test:01",
 	}
 
 	// Test cases
@@ -41,6 +49,7 @@ func TestLoadFile(t *testing.T) {
 		{"Invalid trainStop should fail to load", "test_data/invalid_trainStop.yaml", nil, &InvalidTrainStopError{}},
 		{"Minimal config", "test_data/minimal.yaml", &minimalConfig, nil},
 		{"Minimal config with resolving", "test_data/minimal_with_hostname.yaml", &minimalConfigWithResolving, nil},
+		{"Complete config", "test_data/complete.yaml", &completeConfig, nil},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {

@@ -13,9 +13,9 @@ var validTrainStop = regexp.MustCompile(`^[a-zA-Z0-9:_]+$`)
 
 type Config struct {
 	// Address is the hostname or ip the web server will listen to
-	Address string `yaml:"address",default:"127.0.0.1"`
+	Address string `yaml:"address"`
 	// Port is the tcp port number or service name the web server will listen to
-	Port string `yaml:"port",default:"8080"`
+	Port string `yaml:"port"`
 	// Token is the sncf api token
 	Token string `yaml:"token"`
 	// TrainStop is the navitia code of the train stop the webapp will monitor
@@ -24,12 +24,18 @@ type Config struct {
 
 func (c *Config) validate() error {
 	// address
+	if c.Address == "" {
+		c.Address = "127.0.0.1"
+	}
 	if ip := net.ParseIP(c.Address); ip == nil {
 		if _, err := net.LookupIP(c.Address); err != nil {
 			return newInvalidAddressError(c.Address, err)
 		}
 	}
 	// port
+	if c.Port == "" {
+		c.Port = "8080"
+	}
 	if _, err := net.LookupPort("tcp", c.Port); err != nil {
 		return newInvalidPortError(c.Port, err)
 	}
