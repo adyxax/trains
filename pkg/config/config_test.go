@@ -57,6 +57,7 @@ func TestLoadFile(t *testing.T) {
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
 			}
