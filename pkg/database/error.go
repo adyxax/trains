@@ -38,6 +38,40 @@ func newMigrationError(version int, err error) error {
 	}
 }
 
+// Password hash error
+type PasswordError struct {
+	err error
+}
+
+func (e *PasswordError) Error() string {
+	return fmt.Sprintf("Failed to hash password : %+v", e.err)
+}
+func (e *PasswordError) Unwrap() error { return e.err }
+
+func newPasswordError(err error) error {
+	return &PasswordError{
+		err: err,
+	}
+}
+
+// database query error
+type QueryError struct {
+	msg string
+	err error
+}
+
+func (e *QueryError) Error() string {
+	return fmt.Sprintf("Failed to perform query : %s", e.msg)
+}
+func (e *QueryError) Unwrap() error { return e.err }
+
+func newQueryError(msg string, err error) error {
+	return &QueryError{
+		msg: msg,
+		err: err,
+	}
+}
+
 // database transaction error
 type TransactionError struct {
 	msg string
@@ -45,7 +79,7 @@ type TransactionError struct {
 }
 
 func (e *TransactionError) Error() string {
-	return fmt.Sprintf("Failed to perform transaction : %s", e.msg)
+	return fmt.Sprintf("Failed to perform query : %s", e.msg)
 }
 func (e *TransactionError) Unwrap() error { return e.err }
 

@@ -9,6 +9,12 @@ func TestErrorsCoverage(t *testing.T) {
 	migrationErr := MigrationError{}
 	_ = migrationErr.Error()
 	_ = migrationErr.Unwrap()
+	passwordError := PasswordError{}
+	_ = passwordError.Error()
+	_ = passwordError.Unwrap()
+	queryErr := QueryError{}
+	_ = queryErr.Error()
+	_ = queryErr.Unwrap()
 	transactionErr := TransactionError{}
 	_ = transactionErr.Error()
 	_ = transactionErr.Unwrap()
