@@ -13,7 +13,7 @@ var allMigrations = []func(tx *sql.Tx) error{
 			CREATE TABLE users (
 				id INTEGER PRIMARY KEY,
 				username TEXT NOT NULL UNIQUE,
-				password TEXT,
+				hash TEXT,
 				email TEXT,
 				created_at DATE DEFAULT (datetime('now')),
 				last_login_at DATE DEFAULT NULL

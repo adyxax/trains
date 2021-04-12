@@ -13,7 +13,7 @@ func (env *DBEnv) CreateUser(reg *model.UserRegistration) (*model.User, error) {
 	}
 	query := `
 		INSERT INTO users
-			(username, password, email)
+			(username, hash, email)
 		VALUES
 			($1, $2, $3);`
 	tx, err := env.db.Begin()
@@ -50,7 +50,7 @@ func (env *DBEnv) CreateUser(reg *model.UserRegistration) (*model.User, error) {
 // a PasswordError is return if the passwords do not match
 // a QueryError is returned if the username contains invalid sql characters like %
 func (env *DBEnv) Login(login *model.UserLogin) (*model.User, error) {
-	query := `SELECT id, password, email FROM users WHERE username = $1;`
+	query := `SELECT id, hash, email FROM users WHERE username = $1;`
 	user := model.User{Username: login.Username}
 	var hash string
 	err := env.db.QueryRow(
