@@ -32,18 +32,17 @@ func TestCreateUser(t *testing.T) {
 	// Test cases
 	testCases := []struct {
 		name          string
-		db            *DBEnv
 		input         *model.UserRegistration
 		expected      int
 		expectedError interface{}
 	}{
-		{"Normal user", db, &normalUser, 1, nil},
-		{"Duplicate user", db, &normalUser, 0, &QueryError{}},
-		{"Normal user 2", db, &normalUser2, 2, nil},
+		{"Normal user", &normalUser, 1, nil},
+		{"Duplicate user", &normalUser, 0, &QueryError{}},
+		{"Normal user 2", &normalUser2, 2, nil},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			valid, err := tc.db.CreateUser(tc.input)
+			valid, err := db.CreateUser(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
@@ -105,6 +104,70 @@ func TestCreateUserWithSQLMock(t *testing.T) {
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
+			}
+		})
+	}
+}
+
+func TestLogin(t *testing.T) {
+	user1 := model.UserRegistration{
+		Username: "user1",
+		Password: "user1_pass",
+		Email:    "user1",
+	}
+	user2 := model.UserRegistration{
+		Username: "user2",
+		Password: "user2_pass",
+		Email:    "user2",
+	}
+	// test db setup
+	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
+	require.NoError(t, err)
+	err = db.Migrate()
+	require.NoError(t, err)
+	_, err = db.CreateUser(&user1)
+	require.NoError(t, err)
+	_, err = db.CreateUser(&user2)
+	require.NoError(t, err)
+	// successful logins
+	loginUser1 := model.UserLogin{
+		Username: user1.Username,
+		Password: user1.Password,
+	}
+	loginUser2 := model.UserLogin{
+		Username: user2.Username,
+		Password: user2.Password,
+	}
+	// a failed login
+	failedUser1 := model.UserLogin{
+		Username: user1.Username,
+		Password: user2.Password,
+	}
+	// Query error
+	queryError := model.UserLogin{
+		Username: "%",
+	}
+	// Test cases
+	testCases := []struct {
+		name          string
+		input         *model.UserLogin
+		expectedError interface{}
+	}{
+		{"login user1", &loginUser1, nil},
+		{"login user2", &loginUser2, nil},
+		{"failed login", &failedUser1, &PasswordError{}},
+		{"query error", &queryError, &QueryError{}},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			valid, err := db.Login(tc.input)
+			if tc.expectedError != nil {
+				require.Error(t, err)
+				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Nil(t, valid)
+			} else {
+				require.NoError(t, err)
+				assert.Equal(t, tc.input.Username, valid.Username)
 			}
 		})
 	}

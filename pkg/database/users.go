@@ -45,3 +45,28 @@ func (env *DBEnv) CreateUser(reg *model.UserRegistration) (*model.User, error) {
 	}
 	return &user, nil
 }
+
+// Login logs a user in if the password matches the hash in database
+// a PasswordError is return if the passwords do not match
+// a QueryError is returned if the username contains invalid sql characters like %
+func (env *DBEnv) Login(login *model.UserLogin) (*model.User, error) {
+	query := `SELECT id, password, email FROM users WHERE username = $1;`
+	user := model.User{Username: login.Username}
+	var hash string
+	err := env.db.QueryRow(
+		query,
+		login.Username,
+	).Scan(
+		&user.Id,
+		&hash,
+		&user.Email,
+	)
+	if err != nil {
+		return nil, newQueryError("Could not run database query", err)
+	}
+	err = checkPassword(hash, login.Password)
+	if err != nil {
+		return nil, err
+	}
+	return &user, nil
+}

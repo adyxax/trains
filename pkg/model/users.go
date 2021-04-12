@@ -10,6 +10,11 @@ type User struct {
 	Last_login_at *time.Time `json:"last_login_at"`
 }
 
+type UserLogin struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
 type UserRegistration struct {
 	Username string `json:"username"`
 	Password string `json:"password"`
