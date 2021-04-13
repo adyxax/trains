@@ -13,6 +13,7 @@ A personal instance runs at https://trains.adyxax.org/.
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Building](#building)
+- [Design Choices](#design-choices)
 - [References](#references)
 
 ## Dependencies
@@ -77,6 +78,11 @@ To cross-compile for another os or architecture, use :
 ```
 GOOS=openbsd GOARCH=amd64 go build -ldflags="-s -w" ./cmd/trains-webui/
 ```
+
+## Design Choices
+
+- Being a small webapp, the only database supported for now is sqlite3
+- Being a small webapp with no expectation of traffic and for simplicity, the user sessions are currently stored in the database
 
 ## References
 
