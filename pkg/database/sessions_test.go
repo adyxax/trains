@@ -87,3 +87,64 @@ func TestCreateSessionWithSQLMock(t *testing.T) {
 		})
 	}
 }
+
+func TestResumeSession(t *testing.T) {
+	// test db setup : of the three users only two have session tokens
+	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
+	require.NoError(t, err)
+	err = db.Migrate()
+	require.NoError(t, err)
+	userReg1 := model.UserRegistration{
+		Username: "user1",
+		Password: "user1_pass",
+		Email:    "user1",
+	}
+	user1, err := db.CreateUser(&userReg1)
+	require.NoError(t, err)
+	token1, err := db.CreateSession(user1)
+	require.NoError(t, err)
+	token1bis, err := db.CreateSession(user1)
+	require.NoError(t, err)
+	userReg2 := model.UserRegistration{
+		Username: "user2",
+		Password: "user2_pass",
+		Email:    "user2",
+	}
+	user2, err := db.CreateUser(&userReg2)
+	require.NoError(t, err)
+	token2, err := db.CreateSession(user2)
+	require.NoError(t, err)
+	userReg3 := model.UserRegistration{
+		Username: "user3",
+		Password: "user3_pass",
+		Email:    "user3",
+	}
+	_, err = db.CreateUser(&userReg3)
+	require.NoError(t, err)
+	// Test cases
+	testCases := []struct {
+		name          string
+		input         string
+		expected      *model.User
+		expectedError interface{}
+	}{
+		{"Normal user resume", *token1, user1, nil},
+		{"Normal user resume 1bis", *token1bis, user1, nil},
+		{"Normal user resume 2", *token2, user2, nil},
+		{"a non existant user token triggers an error", "XXX", nil, &QueryError{}},
+	}
+	for _, tc := range testCases {
+		t.Run(tc.name, func(t *testing.T) {
+			valid, err := db.ResumeSession(tc.input)
+			if tc.expectedError != nil {
+				require.Error(t, err)
+				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Nil(t, valid)
+			} else {
+				require.NoError(t, err)
+				assert.NotNil(t, valid)
+				assert.Equal(t, valid.Id, tc.expected.Id)
+			}
+		})
+	}
+}
