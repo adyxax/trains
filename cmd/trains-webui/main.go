@@ -7,6 +7,7 @@ import (
 
 	"git.adyxax.org/adyxax/trains/internal/webui"
 	"git.adyxax.org/adyxax/trains/pkg/config"
+	"git.adyxax.org/adyxax/trains/pkg/database"
 )
 
 func main() {
@@ -23,5 +24,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	webui.Run(c)
+
+	db, err := database.InitDB("sqlite3", "file:test.db?_foreign_keys=on")
+	if err != nil {
+		log.Fatal(err)
+	}
+	if err := db.Migrate(); err != nil {
+		log.Fatal(err)
+	}
+
+	webui.Run(c, db)
 }

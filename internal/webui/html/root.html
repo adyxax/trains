@@ -1,0 +1,15 @@
+{{ template "base" . }}
+
+{{ define "main" }}
+<h3>Horaires des prochains trains à Crépieux la Pape</h3>
+<table>
+	<thead>
+		<tr><th>Arrivée en gare</th><th>Direction</th></tr>
+	</thead>
+	<tbody>
+		{{ range .Departures }}
+		<tr{{ if .Odd }} style="color:#111111;"{{ end }}><td>{{ .Arrival }}</td><td>{{ .DisplayName }}</td></tr>
+		{{ end }}
+	</tbody>
+</table>
+{{ end }}
