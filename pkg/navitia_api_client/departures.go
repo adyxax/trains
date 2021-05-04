@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
+	"git.adyxax.org/adyxax/trains/pkg/model"
 )
 
 type DeparturesResponse struct {
@@ -43,14 +45,14 @@ type DeparturesResponse struct {
 	} `json:"context"`
 }
 
-func (c *Client) GetDepartures(trainStop string) (departures *DeparturesResponse, err error) {
+func (c *Client) GetDepartures(trainStop string) (departures []model.Departure, err error) {
 	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/%s/departures", c.baseURL, trainStop)
 	start := time.Now()
 	c.mutex.Lock()
 	defer c.mutex.Unlock()
 	if cachedResult, ok := c.cache[request]; ok {
 		if start.Sub(cachedResult.ts) < 60*1000*1000*1000 {
-			return cachedResult.result.(*DeparturesResponse), nil
+			return cachedResult.result.([]model.Departure), nil
 		}
 	}
 	req, err := http.NewRequest("GET", request, nil)
@@ -62,8 +64,16 @@ func (c *Client) GetDepartures(trainStop string) (departures *DeparturesResponse
 		return nil, err
 	}
 	defer resp.Body.Close()
-	if err = json.NewDecoder(resp.Body).Decode(&departures); err != nil {
+	var data DeparturesResponse
+	if err = json.NewDecoder(resp.Body).Decode(&data); err != nil {
 		return nil, err
+	}
+	for i := 0; i < len(data.Departures); i++ {
+		t, err := time.Parse("20060102T150405", data.Departures[i].StopDateTime.ArrivalDateTime)
+		if err != nil { // TODO fail better
+			panic(err)
+		}
+		departures = append(departures, model.Departure{data.Departures[i].DisplayInformations.Direction, t.Format("Mon, 02 Jan 2006 15:04:05")})
 	}
 	c.cache[request] = cachedResult{
 		ts:     start,
