@@ -57,27 +57,32 @@ func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Depa
 	}
 	req, err := http.NewRequest("GET", request, nil)
 	if err != nil {
-		return nil, err
+		return nil, newHttpClientError("http.NewRequest error", err)
 	}
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return nil, err
+		return nil, newHttpClientError("httpClient.Do error", err)
 	}
 	defer resp.Body.Close()
-	var data DeparturesResponse
-	if err = json.NewDecoder(resp.Body).Decode(&data); err != nil {
-		return nil, err
-	}
-	for i := 0; i < len(data.Departures); i++ {
-		t, err := time.Parse("20060102T150405", data.Departures[i].StopDateTime.ArrivalDateTime)
-		if err != nil { // TODO fail better
-			panic(err)
+	if resp.StatusCode == http.StatusOK {
+		var data DeparturesResponse
+		if err = json.NewDecoder(resp.Body).Decode(&data); err != nil {
+			return nil, newJsonDecodeError("GetDepartures "+trainStop, err)
 		}
-		departures = append(departures, model.Departure{data.Departures[i].DisplayInformations.Direction, t.Format("Mon, 02 Jan 2006 15:04:05")})
-	}
-	c.cache[request] = cachedResult{
-		ts:     start,
-		result: departures,
+		// TODO test for no json error
+		for i := 0; i < len(data.Departures); i++ {
+			t, err := time.Parse("20060102T150405", data.Departures[i].StopDateTime.ArrivalDateTime)
+			if err != nil {
+				return nil, newDateParsingError(data.Departures[i].StopDateTime.ArrivalDateTime, err)
+			}
+			departures = append(departures, model.Departure{data.Departures[i].DisplayInformations.Direction, t.Format("Mon, 02 Jan 2006 15:04:05")})
+		}
+		c.cache[request] = cachedResult{
+			ts:     start,
+			result: departures,
+		}
+	} else {
+		err = newApiError(resp.StatusCode, "GetDepartures "+trainStop)
 	}
 	return
 }
