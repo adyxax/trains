@@ -45,7 +45,7 @@ type DeparturesResponse struct {
 	} `json:"context"`
 }
 
-func (c *Client) GetDepartures(trainStop string) (departures []model.Departure, err error) {
+func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Departure, err error) {
 	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/%s/departures", c.baseURL, trainStop)
 	start := time.Now()
 	c.mutex.Lock()

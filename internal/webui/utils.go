@@ -20,7 +20,7 @@ var staticFS embed.FS
 type env struct {
 	conf    *config.Config
 	dbEnv   *database.DBEnv
-	navitia *navitia_api_client.Client
+	navitia navitia_api_client.Client
 }
 
 type handlerError interface {

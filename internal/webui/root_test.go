@@ -4,10 +4,20 @@ import (
 	"net/http"
 	"testing"
 
+	"git.adyxax.org/adyxax/trains/pkg/config"
 	"git.adyxax.org/adyxax/trains/pkg/database"
 	"git.adyxax.org/adyxax/trains/pkg/model"
 	"github.com/stretchr/testify/require"
 )
+
+type NavitiaMockClient struct {
+	departures []model.Departure
+	err        error
+}
+
+func (c *NavitiaMockClient) GetDepartures(trainStop string) (departures []model.Departure, err error) {
+	return c.departures, c.err
+}
 
 func TestRootHandler(t *testing.T) {
 	// test environment setup
@@ -21,12 +31,19 @@ func TestRootHandler(t *testing.T) {
 	require.Nil(t, err)
 	token1, err := dbEnv.CreateSession(user1)
 	require.Nil(t, err)
-	e := &env{
+	e := env{
 		dbEnv: dbEnv,
-		// TODO mock navitia
+		conf:  &config.Config{TrainStop: "test"},
 	}
+	departures1 := []model.Departure{
+		model.Departure{
+			Direction: "test direction",
+			Arrival:   "20210503T150405",
+		},
+	}
+	e.navitia = &NavitiaMockClient{departures: departures1, err: nil}
 	// test GET requests
-	runHttpTest(t, e, rootHandler, &httpTestCase{
+	runHttpTest(t, &e, rootHandler, &httpTestCase{
 		name: "a simple get when not logged in should redirect to the login page",
 		input: httpTestInput{
 			method: http.MethodGet,
@@ -37,18 +54,16 @@ func TestRootHandler(t *testing.T) {
 			location: "/login",
 		},
 	})
-	// TODO mock navitia
-	_ = token1
-	//runHttpTest(t, e, rootHandler, &httpTestCase{
-	//    name: "a simple get when logged in should display the departure times",
-	//    input: httpTestInput{
-	//        method: http.MethodGet,
-	//        path:   "/",
-	//        cookie: &http.Cookie{Name: sessionCookieName, Value: *token1},
-	//    },
-	//    expect: httpTestExpect{
-	//        code:       http.StatusOK,
-	//        bodyString: "Horaires des prochains trains",
-	//    },
-	//})
+	runHttpTest(t, &e, rootHandler, &httpTestCase{
+		name: "a simple get when logged in should display the departure times",
+		input: httpTestInput{
+			method: http.MethodGet,
+			path:   "/",
+			cookie: &http.Cookie{Name: sessionCookieName, Value: *token1},
+		},
+		expect: httpTestExpect{
+			code:       http.StatusOK,
+			bodyString: "Horaires des prochains trains",
+		},
+	})
 }

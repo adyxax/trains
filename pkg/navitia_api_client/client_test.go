@@ -9,15 +9,15 @@ import (
 )
 
 // package utilities
-func newTestClient(ts *httptest.Server) *Client {
-	return &Client{
+func newTestClient(ts *httptest.Server) *NavitiaClient {
+	return &NavitiaClient{
 		baseURL:    fmt.Sprintf(ts.URL),
 		httpClient: ts.Client(),
 		cache:      make(map[string]cachedResult),
 	}
 }
 
-func newTestClientFromFilename(t *testing.T, filename string) (*Client, *httptest.Server) {
+func newTestClientFromFilename(t *testing.T, filename string) (*NavitiaClient, *httptest.Server) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		page, err := ioutil.ReadFile(filename)
 		if err != nil {
@@ -26,13 +26,4 @@ func newTestClientFromFilename(t *testing.T, filename string) (*Client, *httptes
 		w.Write(page)
 	}))
 	return newTestClient(ts), ts
-}
-
-// tests
-func TestNewClient(t *testing.T) {
-	client := NewClient("test")
-	want := "https://test@api.sncf.com/v1"
-	if client.baseURL != want {
-		t.Fatal("Invalid new client")
-	}
 }

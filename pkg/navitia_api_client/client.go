@@ -5,9 +5,15 @@ import (
 	"net/http"
 	"sync"
 	"time"
+
+	"git.adyxax.org/adyxax/trains/pkg/model"
 )
 
-type Client struct {
+type Client interface {
+	GetDepartures(trainStop string) (departures []model.Departure, err error)
+}
+
+type NavitiaClient struct {
 	baseURL    string
 	httpClient *http.Client
 
@@ -20,8 +26,8 @@ type cachedResult struct {
 	result interface{}
 }
 
-func NewClient(token string) *Client {
-	return &Client{
+func NewClient(token string) Client {
+	return &NavitiaClient{
 		baseURL: fmt.Sprintf("https://%s@api.sncf.com/v1", token),
 		httpClient: &http.Client{
 			Timeout: time.Minute,
