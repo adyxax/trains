@@ -23,6 +23,10 @@ var allMigrations = []func(tx *sql.Tx) error{
 				user_id INTEGER NOT NULL,
 				created_at DATE DEFAULT (datetime('now')),
 				FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+			);
+			CREATE TABLE train_stops (
+				id TEXT PRIMARY KEY,
+				name TEXT NOT NULL UNIQUE
 			);`
 		_, err = tx.Exec(sql)
 		return err
