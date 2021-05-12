@@ -19,7 +19,7 @@ var allMigrations = []func(tx *sql.Tx) error{
 				last_login_at DATE DEFAULT NULL
 			);
 			CREATE TABLE sessions (
-				token TEXT NOT NULL UNIQUE,
+				token TEXT PRIMARY KEY,
 				user_id INTEGER NOT NULL,
 				created_at DATE DEFAULT (datetime('now')),
 				FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
