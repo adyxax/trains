@@ -1,6 +1,8 @@
 package database
 
-import "git.adyxax.org/adyxax/trains/pkg/model"
+import (
+	"git.adyxax.org/adyxax/trains/pkg/model"
+)
 
 func (env *DBEnv) ReplaceAndImportTrainStops(trainStops []model.TrainStop) error {
 	pre_query := `DELETE FROM train_stops;`

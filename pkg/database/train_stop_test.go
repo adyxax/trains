@@ -73,7 +73,7 @@ func TestReplaceAndImportTrainStopsWithSQLMock(t *testing.T) {
 	}
 	defer dbCannotInsertError.Close()
 	mockCannotInsertError.ExpectBegin()
-	mockCannotInsertError.ExpectExec(`DELETE FROM`)
+	mockCannotInsertError.ExpectExec(`DELETE FROM`).WillReturnResult(sqlmock.NewResult(1, 1))
 	// Transaction commit error
 	dbCommitError, mockCommitError, err := sqlmock.New()
 	if err != nil {
@@ -81,8 +81,9 @@ func TestReplaceAndImportTrainStopsWithSQLMock(t *testing.T) {
 	}
 	defer dbCommitError.Close()
 	mockCommitError.ExpectBegin()
-	mockCommitError.ExpectExec(`DELETE FROM`)
-	mockCommitError.ExpectExec(`INSERT INTO`)
+	mockCommitError.ExpectExec(`DELETE FROM`).WillReturnResult(sqlmock.NewResult(1, 1))
+	mockCommitError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewResult(1, 1))
+	mockCommitError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewResult(1, 1))
 	// Test cases
 	testCases := []struct {
 		name          string
@@ -92,7 +93,7 @@ func TestReplaceAndImportTrainStopsWithSQLMock(t *testing.T) {
 		{"begin transaction error", &DBEnv{db: dbBeginError}, &TransactionError{}},
 		{"query error cannot delete from", &DBEnv{db: dbCannotDeleteFrom}, &QueryError{}},
 		{"query error cannot insert into", &DBEnv{db: dbCannotInsertError}, &QueryError{}},
-		// TODO FIX THIS TEST {"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
+		{"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
