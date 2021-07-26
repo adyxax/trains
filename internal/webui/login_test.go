@@ -187,4 +187,27 @@ func TestLoginHandler(t *testing.T) {
 			err:  &statusError{http.StatusNotFound, simpleErrorMessage},
 		},
 	})
+	// Test other request types
+	methods := []string{
+		http.MethodConnect,
+		http.MethodDelete,
+		http.MethodHead,
+		http.MethodOptions,
+		http.MethodPatch,
+		http.MethodPut,
+		http.MethodTrace,
+	}
+	for _, method := range methods {
+		runHttpTest(t, e, loginHandler, &httpTestCase{
+			name: "a login attempt with an invalid method should error",
+			input: httpTestInput{
+				method: method,
+				path:   "/login",
+			},
+			expect: httpTestExpect{
+				code: http.StatusMethodNotAllowed,
+				err:  &statusError{http.StatusMethodNotAllowed, simpleErrorMessage},
+			},
+		})
+	}
 }

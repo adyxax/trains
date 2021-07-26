@@ -26,7 +26,8 @@ func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			http.Redirect(w, r, "/", http.StatusFound)
 			return nil
 		}
-		if r.Method == http.MethodPost {
+		switch r.Method {
+		case http.MethodPost:
 			r.ParseForm()
 			// username
 			username, ok := r.Form["username"]
@@ -71,13 +72,15 @@ func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			http.SetCookie(w, &cookie)
 			http.Redirect(w, r, "/", http.StatusFound)
 			return nil
-		} else {
+		case http.MethodGet:
 			p := Page{Title: "Login"}
 			err := loginTemplate.ExecuteTemplate(w, "login.html", p)
 			if err != nil {
 				return newStatusError(http.StatusInternalServerError, err)
 			}
 			return nil
+		default:
+			return newStatusError(http.StatusMethodNotAllowed, fmt.Errorf(http.StatusText(http.StatusMethodNotAllowed)))
 		}
 	} else {
 		return newStatusError(http.StatusNotFound, fmt.Errorf("Invalid path in loginHandler"))
