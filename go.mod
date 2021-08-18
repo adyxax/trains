@@ -1,6 +1,6 @@
 module git.adyxax.org/adyxax/trains
 
-go 1.16
+go 1.17
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
@@ -13,3 +13,5 @@ require (
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b
 )
+
+require github.com/pmezard/go-difflib v1.0.0 // indirect
