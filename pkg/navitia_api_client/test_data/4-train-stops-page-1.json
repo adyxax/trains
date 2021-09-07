@@ -1,0 +1,239 @@
+{
+  "pagination": {
+    "start_page": 1,
+    "items_on_page": 4,
+    "items_per_page": 4,
+    "total_result": 12
+  },
+  "links": [
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}",
+      "type": "stop_areas",
+      "rel": "stop_areas",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/route_schedules",
+      "type": "route_schedules",
+      "rel": "route_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/stop_schedules",
+      "type": "stop_schedules",
+      "rel": "stop_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/arrivals",
+      "type": "arrivals",
+      "rel": "arrivals",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/departures",
+      "type": "departures",
+      "rel": "departures",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/places_nearby",
+      "type": "places_nearby",
+      "rel": "places_nearby",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/journeys",
+      "type": "journey",
+      "rel": "journeys",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/traffic_reports",
+      "type": "disruption",
+      "rel": "disruptions",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=0",
+      "type": "previous",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=2",
+      "type": "next",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=1280",
+      "type": "last",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4",
+      "type": "first",
+      "templated": false
+    }
+  ],
+  "disruptions": [],
+  "feed_publishers": [
+    {
+      "url": "",
+      "id": "sncf",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    },
+    {
+      "url": "",
+      "id": "SNCF:sncf-piv",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    }
+  ],
+  "context": {
+    "timezone": "Europe/Paris",
+    "current_datetime": "20210906T212057"
+  },
+  "stop_areas": [
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87545269"
+        },
+        {
+          "type": "uic",
+          "value": "87545269"
+        }
+      ],
+      "name": "Ablon",
+      "links": [],
+      "coord": {
+        "lat": "48.725443",
+        "lon": "2.419213"
+      },
+      "label": "Ablon (Ablon-sur-Seine)",
+      "administrative_regions": [
+        {
+          "insee": "94001",
+          "name": "Ablon-sur-Seine",
+          "level": 8,
+          "coord": {
+            "lat": "48.7247582",
+            "lon": "2.421509"
+          },
+          "label": "Ablon-sur-Seine (94480)",
+          "id": "admin:fr:94001",
+          "zip_code": "94480"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87545269"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87590588"
+        },
+        {
+          "type": "uic",
+          "value": "87590588"
+        }
+      ],
+      "name": "Ablon Noctilien",
+      "links": [],
+      "coord": {
+        "lat": "48.72551",
+        "lon": "2.419155"
+      },
+      "label": "Ablon Noctilien (Ablon-sur-Seine)",
+      "administrative_regions": [
+        {
+          "insee": "94001",
+          "name": "Ablon-sur-Seine",
+          "level": 8,
+          "coord": {
+            "lat": "48.7247582",
+            "lon": "2.421509"
+          },
+          "label": "Ablon-sur-Seine (94480)",
+          "id": "admin:fr:94001",
+          "zip_code": "94480"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87590588"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87191403"
+        },
+        {
+          "type": "uic",
+          "value": "87191403"
+        }
+      ],
+      "name": "Aboncourt Mairie",
+      "links": [],
+      "coord": {
+        "lat": "49.261076",
+        "lon": "6.346603"
+      },
+      "label": "Aboncourt Mairie (Aboncourt)",
+      "administrative_regions": [
+        {
+          "insee": "57001",
+          "name": "Aboncourt",
+          "level": 8,
+          "coord": {
+            "lat": "49.2602817",
+            "lon": "6.3463759"
+          },
+          "label": "Aboncourt (57920)",
+          "id": "admin:fr:57001",
+          "zip_code": "57920"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87191403"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87721944"
+        },
+        {
+          "type": "uic",
+          "value": "87721944"
+        }
+      ],
+      "name": "Abrest Mairie",
+      "links": [],
+      "coord": {
+        "lat": "46.098868",
+        "lon": "3.444791"
+      },
+      "label": "Abrest Mairie (Abrest)",
+      "administrative_regions": [
+        {
+          "insee": "3001",
+          "name": "Abrest",
+          "level": 8,
+          "coord": {
+            "lat": "46.0980139",
+            "lon": "3.4450434"
+          },
+          "label": "Abrest (03200)",
+          "id": "admin:fr:3001",
+          "zip_code": "03200"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87721944"
+    }
+  ]
+}

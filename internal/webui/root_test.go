@@ -12,11 +12,16 @@ import (
 
 type NavitiaMockClient struct {
 	departures []model.Departure
+	trainStops []model.TrainStop
 	err        error
 }
 
 func (c *NavitiaMockClient) GetDepartures(trainStop string) (departures []model.Departure, err error) {
 	return c.departures, c.err
+}
+
+func (c *NavitiaMockClient) GetTrainStops() (trainStops []model.TrainStop, err error) {
+	return c.trainStops, c.err
 }
 
 func TestRootHandler(t *testing.T) {

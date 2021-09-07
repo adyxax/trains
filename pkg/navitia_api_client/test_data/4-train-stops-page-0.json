@@ -1,0 +1,264 @@
+{
+  "pagination": {
+    "start_page": 0,
+    "items_on_page": 4,
+    "items_per_page": 4,
+    "total_result": 12
+  },
+  "links": [
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}",
+      "type": "stop_areas",
+      "rel": "stop_areas",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/route_schedules",
+      "type": "route_schedules",
+      "rel": "route_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/stop_schedules",
+      "type": "stop_schedules",
+      "rel": "stop_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/arrivals",
+      "type": "arrivals",
+      "rel": "arrivals",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/departures",
+      "type": "departures",
+      "rel": "departures",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/places_nearby",
+      "type": "places_nearby",
+      "rel": "places_nearby",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/journeys",
+      "type": "journey",
+      "rel": "journeys",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/traffic_reports",
+      "type": "disruption",
+      "rel": "disruptions",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=1",
+      "type": "next",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=1280",
+      "type": "last",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4",
+      "type": "first",
+      "templated": false
+    }
+  ],
+  "disruptions": [],
+  "feed_publishers": [
+    {
+      "url": "",
+      "id": "sncf",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    },
+    {
+      "url": "",
+      "id": "SNCF:sncf-piv",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    }
+  ],
+  "context": {
+    "timezone": "Europe/Paris",
+    "current_datetime": "20210906T224334"
+  },
+  "stop_areas": [
+    {
+      "codes": [
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87144758"
+        },
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87407536"
+        },
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87641241"
+        },
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87714089"
+        },
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87757005"
+        },
+        {
+          "type": "secondary_id",
+          "value": "SNCF:87781567"
+        },
+        {
+          "type": "source",
+          "value": "87144758"
+        },
+        {
+          "type": "source",
+          "value": "87407536"
+        },
+        {
+          "type": "source",
+          "value": "87420802"
+        },
+        {
+          "type": "source",
+          "value": "87641241"
+        },
+        {
+          "type": "source",
+          "value": "87714089"
+        },
+        {
+          "type": "source",
+          "value": "87757005"
+        },
+        {
+          "type": "source",
+          "value": "87781567"
+        }
+      ],
+      "name": "",
+      "links": [],
+      "coord": {
+        "lat": "0",
+        "lon": "0"
+      },
+      "label": "",
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87420802"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87313759"
+        },
+        {
+          "type": "uic",
+          "value": "87313759"
+        }
+      ],
+      "name": "Abancourt",
+      "links": [],
+      "coord": {
+        "lat": "49.685602",
+        "lon": "1.774351"
+      },
+      "label": "Abancourt (Abancourt)",
+      "administrative_regions": [
+        {
+          "insee": "60001",
+          "name": "Abancourt",
+          "level": 8,
+          "coord": {
+            "lat": "49.6977145",
+            "lon": "1.7646826"
+          },
+          "label": "Abancourt (60220)",
+          "id": "admin:fr:60001",
+          "zip_code": "60220"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87313759"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87481614"
+        },
+        {
+          "type": "uic",
+          "value": "87481614"
+        }
+      ],
+      "name": "Abbaretz",
+      "links": [],
+      "coord": {
+        "lat": "47.555241",
+        "lon": "-1.524289"
+      },
+      "label": "Abbaretz (Abbaretz)",
+      "administrative_regions": [
+        {
+          "insee": "44001",
+          "name": "Abbaretz",
+          "level": 8,
+          "coord": {
+            "lat": "47.5525545",
+            "lon": "-1.5322775"
+          },
+          "label": "Abbaretz (44170)",
+          "id": "admin:fr:44001",
+          "zip_code": "44170"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87481614"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87317362"
+        },
+        {
+          "type": "uic",
+          "value": "87317362"
+        }
+      ],
+      "name": "Abbeville",
+      "links": [],
+      "coord": {
+        "lat": "50.102216",
+        "lon": "1.824487"
+      },
+      "label": "Abbeville (Abbeville)",
+      "administrative_regions": [
+        {
+          "insee": "80001",
+          "name": "Abbeville",
+          "level": 8,
+          "coord": {
+            "lat": "50.1060835",
+            "lon": "1.8337029"
+          },
+          "label": "Abbeville (80100)",
+          "id": "admin:fr:80001",
+          "zip_code": "80100"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87317362"
+    }
+  ]
+}

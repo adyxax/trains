@@ -70,6 +70,7 @@ func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Depa
 			return nil, newJsonDecodeError("GetDepartures "+trainStop, err)
 		}
 		// TODO test for no json error
+		// TODO handle pagination
 		for i := 0; i < len(data.Departures); i++ {
 			t, err := time.Parse("20060102T150405", data.Departures[i].StopDateTime.ArrivalDateTime)
 			if err != nil {

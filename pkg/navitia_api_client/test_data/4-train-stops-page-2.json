@@ -1,0 +1,239 @@
+{
+  "pagination": {
+    "start_page": 2,
+    "items_on_page": 4,
+    "items_per_page": 4,
+    "total_result": 12
+  },
+  "links": [
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}",
+      "type": "stop_areas",
+      "rel": "stop_areas",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/route_schedules",
+      "type": "route_schedules",
+      "rel": "route_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/stop_schedules",
+      "type": "stop_schedules",
+      "rel": "stop_schedules",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/arrivals",
+      "type": "arrivals",
+      "rel": "arrivals",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/departures",
+      "type": "departures",
+      "rel": "departures",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/places_nearby",
+      "type": "places_nearby",
+      "rel": "places_nearby",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/journeys",
+      "type": "journey",
+      "rel": "journeys",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas/{stop_areas.id}/traffic_reports",
+      "type": "disruption",
+      "rel": "disruptions",
+      "templated": true
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=1",
+      "type": "previous",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=3",
+      "type": "next",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4&start_page=1280",
+      "type": "last",
+      "templated": false
+    },
+    {
+      "href": "https://api.sncf.com/v1/coverage/sncf/stop_areas?count=4",
+      "type": "first",
+      "templated": false
+    }
+  ],
+  "disruptions": [],
+  "feed_publishers": [
+    {
+      "url": "",
+      "id": "sncf",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    },
+    {
+      "url": "",
+      "id": "SNCF:sncf-piv",
+      "license": "Private (unspecified)",
+      "name": "SNCF PIV Production"
+    }
+  ],
+  "context": {
+    "timezone": "Europe/Paris",
+    "current_datetime": "20210906T212107"
+  },
+  "stop_areas": [
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87677252"
+        },
+        {
+          "type": "uic",
+          "value": "87677252"
+        }
+      ],
+      "name": "Accolay Le Pont",
+      "links": [],
+      "coord": {
+        "lat": "47.663798",
+        "lon": "3.709584"
+      },
+      "label": "Accolay Le Pont (Deux Rivières)",
+      "administrative_regions": [
+        {
+          "insee": "89130",
+          "name": "Deux Rivières",
+          "level": 8,
+          "coord": {
+            "lat": "47.6839847",
+            "lon": "3.6898895"
+          },
+          "label": "Deux Rivières",
+          "id": "admin:fr:89130",
+          "zip_code": ""
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87677252"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87386052"
+        },
+        {
+          "type": "uic",
+          "value": "87386052"
+        }
+      ],
+      "name": "Achères Grand Cormier",
+      "links": [],
+      "coord": {
+        "lat": "48.955187",
+        "lon": "2.091962"
+      },
+      "label": "Achères Grand Cormier (Saint-Germain-en-Laye)",
+      "administrative_regions": [
+        {
+          "insee": "78551",
+          "name": "Saint-Germain-en-Laye",
+          "level": 8,
+          "coord": {
+            "lat": "48.8990413",
+            "lon": "2.0942792"
+          },
+          "label": "Saint-Germain-en-Laye",
+          "id": "admin:fr:78551",
+          "zip_code": ""
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87386052"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87612978"
+        },
+        {
+          "type": "uic",
+          "value": "87612978"
+        }
+      ],
+      "name": "Acheres Grand Cormier Noctilien",
+      "links": [],
+      "coord": {
+        "lat": "48.955143",
+        "lon": "2.091769"
+      },
+      "label": "Acheres Grand Cormier Noctilien (Saint-Germain-en-Laye)",
+      "administrative_regions": [
+        {
+          "insee": "78551",
+          "name": "Saint-Germain-en-Laye",
+          "level": 8,
+          "coord": {
+            "lat": "48.8990413",
+            "lon": "2.0942792"
+          },
+          "label": "Saint-Germain-en-Laye",
+          "id": "admin:fr:78551",
+          "zip_code": ""
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87612978"
+    },
+    {
+      "codes": [
+        {
+          "type": "source",
+          "value": "87381657"
+        },
+        {
+          "type": "uic",
+          "value": "87381657"
+        }
+      ],
+      "name": "Achères Ville",
+      "links": [],
+      "coord": {
+        "lat": "48.97011",
+        "lon": "2.07739"
+      },
+      "label": "Achères Ville (Achères)",
+      "administrative_regions": [
+        {
+          "insee": "78005",
+          "name": "Achères",
+          "level": 8,
+          "coord": {
+            "lat": "48.9606321",
+            "lon": "2.0698106"
+          },
+          "label": "Achères (78260)",
+          "id": "admin:fr:78005",
+          "zip_code": "78260"
+        }
+      ],
+      "timezone": "Europe/Paris",
+      "id": "stop_area:SNCF:87381657"
+    }
+  ]
+}
