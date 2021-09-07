@@ -3,7 +3,6 @@ package navitia_api_client
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
@@ -22,7 +21,7 @@ type TrainStopsResponse struct {
 		Codes                []interface{} `json:"codes"`
 		Links                []interface{} `json:"links"`
 		Coord                interface{}   `json:"coord"`
-		Label                interface{}   `json:"label"`
+		Label                string        `json:"label"`
 		Timezone             interface{}   `json:"timezone"`
 		AdministrativeRegion interface{}   `json:"administrative_regions"`
 	} `json:"stop_areas"`
@@ -53,10 +52,11 @@ func getTrainStopsPage(c *NavitiaClient, i int) (trainStops []model.TrainStop, e
 			return nil, newJsonDecodeError("GetTrainStops ", err)
 		}
 		for i := 0; i < len(data.StopAreas); i++ {
-			trainStops = append(trainStops, model.TrainStop{data.StopAreas[i].ID, data.StopAreas[i].Name})
+			if data.StopAreas[i].Label != "" {
+				trainStops = append(trainStops, model.TrainStop{data.StopAreas[i].ID, data.StopAreas[i].Label})
+			}
 		}
 		if data.Pagination.ItemsOnPage+data.Pagination.ItemsPerPage*data.Pagination.StartPage < data.Pagination.TotalResult {
-			log.Printf("pagination %d\n", i)
 			tss, err := getTrainStopsPage(c, i+1)
 			if err != nil {
 				return nil, err

@@ -76,7 +76,8 @@ func TestGetTrainStops(t *testing.T) {
 	if err != nil {
 		t.Fatalf("could not get train stops : %s", err)
 	}
-	if len(trainStops) != 4 {
+	// 4 records but one is empty (navitia api quirk)
+	if len(trainStops) != 3 {
 		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(trainStops))
 	}
 	// normal request in multiple pages
@@ -90,7 +91,8 @@ func TestGetTrainStops(t *testing.T) {
 	if err != nil {
 		t.Fatalf("could not get train stops : %+v", err)
 	}
-	if len(trainStops) != 12 {
+	// 12 records but one is empty (navitia api quirk)
+	if len(trainStops) != 11 {
 		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(trainStops))
 	}
 	// failing request in multiple pages with last one missing

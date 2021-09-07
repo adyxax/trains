@@ -26,7 +26,7 @@ var allMigrations = []func(tx *sql.Tx) error{
 			);
 			CREATE TABLE train_stops (
 				id TEXT PRIMARY KEY,
-				name TEXT NOT NULL UNIQUE
+				name TEXT NOT NULL
 			);`
 		_, err = tx.Exec(sql)
 		return err

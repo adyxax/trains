@@ -10,6 +10,27 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
+func TestCountTrainStops(t *testing.T) {
+	trainStops := []model.TrainStop{
+		model.TrainStop{Id: "id1", Name: "name1"},
+		model.TrainStop{Id: "id2", Name: "name2"},
+	}
+	// test db setup
+	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
+	require.NoError(t, err)
+	// check sql error
+	i, err := db.CountTrainStops()
+	require.Error(t, err)
+	assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&QueryError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&QueryError{}))
+	// normal check
+	err = db.Migrate()
+	require.NoError(t, err)
+	err = db.ReplaceAndImportTrainStops(trainStops)
+	i, err = db.CountTrainStops()
+	require.NoError(t, err)
+	assert.Equal(t, i, len(trainStops))
+}
+
 func TestReplaceAndImportTrainStops(t *testing.T) {
 	// test db setup
 	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
