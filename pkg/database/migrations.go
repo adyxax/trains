@@ -15,8 +15,7 @@ var allMigrations = []func(tx *sql.Tx) error{
 				username TEXT NOT NULL UNIQUE,
 				hash TEXT,
 				email TEXT,
-				created_at DATE DEFAULT (datetime('now')),
-				last_login_at DATE DEFAULT NULL
+				created_at DATE DEFAULT (datetime('now'))
 			);
 			CREATE TABLE sessions (
 				token TEXT PRIMARY KEY,
