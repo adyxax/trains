@@ -31,6 +31,27 @@ func TestCountStops(t *testing.T) {
 	assert.Equal(t, i, len(trainStops))
 }
 
+func TestGetStop(t *testing.T) {
+	trainStops := []model.Stop{
+		model.Stop{Id: "id1", Name: "name1"},
+		model.Stop{Id: "id2", Name: "name2"},
+	}
+	// test db setup
+	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
+	require.NoError(t, err)
+	err = db.Migrate()
+	require.NoError(t, err)
+	err = db.ReplaceAndImportStops(trainStops)
+	// normal check
+	stop, err := db.GetStop("id1")
+	require.NoError(t, err)
+	assert.Equal(t, stop, &trainStops[0])
+	// error check
+	stop, err = db.GetStop("non_existent")
+	require.Error(t, err)
+	assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&QueryError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&QueryError{}))
+}
+
 func TestReplaceAndImportStops(t *testing.T) {
 	// test db setup
 	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")

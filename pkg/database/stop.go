@@ -13,6 +13,21 @@ func (env *DBEnv) CountStops() (i int, err error) {
 	return
 }
 
+func (env *DBEnv) GetStop(id string) (*model.Stop, error) {
+	query := `SELECT name FROM stops WHERE id = $1;`
+	stop := model.Stop{Id: id}
+	err := env.db.QueryRow(
+		query,
+		id,
+	).Scan(
+		&stop.Name,
+	)
+	if err != nil {
+		return nil, newQueryError("Could not run database query", err)
+	}
+	return &stop, nil
+}
+
 func (env *DBEnv) ReplaceAndImportStops(trainStops []model.Stop) error {
 	pre_query := `DELETE FROM stops;`
 	query := `
