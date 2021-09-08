@@ -4,8 +4,8 @@ import (
 	"git.adyxax.org/adyxax/trains/pkg/model"
 )
 
-func (env *DBEnv) CountTrainStops() (i int, err error) {
-	query := `SELECT count(*) from train_stops;`
+func (env *DBEnv) CountStops() (i int, err error) {
+	query := `SELECT count(*) from stops;`
 	err = env.db.QueryRow(query).Scan(&i)
 	if err != nil {
 		return 0, newQueryError("Could not run database query: most likely the schema is corrupted", err)
@@ -13,10 +13,10 @@ func (env *DBEnv) CountTrainStops() (i int, err error) {
 	return
 }
 
-func (env *DBEnv) ReplaceAndImportTrainStops(trainStops []model.TrainStop) error {
-	pre_query := `DELETE FROM train_stops;`
+func (env *DBEnv) ReplaceAndImportStops(trainStops []model.Stop) error {
+	pre_query := `DELETE FROM stops;`
 	query := `
-		INSERT INTO train_stops
+		INSERT INTO stops
 			(id, name)
 		VALUES
 			($1, $2);`

@@ -10,46 +10,46 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCountTrainStops(t *testing.T) {
-	trainStops := []model.TrainStop{
-		model.TrainStop{Id: "id1", Name: "name1"},
-		model.TrainStop{Id: "id2", Name: "name2"},
+func TestCountStops(t *testing.T) {
+	trainStops := []model.Stop{
+		model.Stop{Id: "id1", Name: "name1"},
+		model.Stop{Id: "id2", Name: "name2"},
 	}
 	// test db setup
 	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
 	require.NoError(t, err)
 	// check sql error
-	i, err := db.CountTrainStops()
+	i, err := db.CountStops()
 	require.Error(t, err)
 	assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&QueryError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&QueryError{}))
 	// normal check
 	err = db.Migrate()
 	require.NoError(t, err)
-	err = db.ReplaceAndImportTrainStops(trainStops)
-	i, err = db.CountTrainStops()
+	err = db.ReplaceAndImportStops(trainStops)
+	i, err = db.CountStops()
 	require.NoError(t, err)
 	assert.Equal(t, i, len(trainStops))
 }
 
-func TestReplaceAndImportTrainStops(t *testing.T) {
+func TestReplaceAndImportStops(t *testing.T) {
 	// test db setup
 	db, err := InitDB("sqlite3", "file::memory:?_foreign_keys=on")
 	require.NoError(t, err)
 	err = db.Migrate()
 	require.NoError(t, err)
 	// datasets
-	data1 := []model.TrainStop{
-		model.TrainStop{Id: "first", Name: "firstName"},
-		model.TrainStop{Id: "second", Name: "secondName"},
+	data1 := []model.Stop{
+		model.Stop{Id: "first", Name: "firstName"},
+		model.Stop{Id: "second", Name: "secondName"},
 	}
-	data2 := []model.TrainStop{
-		model.TrainStop{Id: "first", Name: "firstTest"},
-		model.TrainStop{Id: "secondTest", Name: "secondTest"},
-		model.TrainStop{Id: "thirdTest", Name: "thirdTest"},
+	data2 := []model.Stop{
+		model.Stop{Id: "first", Name: "firstTest"},
+		model.Stop{Id: "secondTest", Name: "secondTest"},
+		model.Stop{Id: "thirdTest", Name: "thirdTest"},
 	}
 	testCases := []struct {
 		name          string
-		input         []model.TrainStop
+		input         []model.Stop
 		expectedError interface{}
 	}{
 		{"Normal insert", data1, nil},
@@ -57,7 +57,7 @@ func TestReplaceAndImportTrainStops(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			err := db.ReplaceAndImportTrainStops(tc.input)
+			err := db.ReplaceAndImportStops(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
@@ -68,11 +68,11 @@ func TestReplaceAndImportTrainStops(t *testing.T) {
 	}
 }
 
-func TestReplaceAndImportTrainStopsWithSQLMock(t *testing.T) {
+func TestReplaceAndImportStopsWithSQLMock(t *testing.T) {
 	// datasets
-	data1 := []model.TrainStop{
-		model.TrainStop{Id: "first", Name: "firstName"},
-		model.TrainStop{Id: "second", Name: "secondName"},
+	data1 := []model.Stop{
+		model.Stop{Id: "first", Name: "firstName"},
+		model.Stop{Id: "second", Name: "secondName"},
 	}
 	// Transaction begin error
 	dbBeginError, _, err := sqlmock.New()
@@ -118,7 +118,7 @@ func TestReplaceAndImportTrainStopsWithSQLMock(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
-			err := tc.db.ReplaceAndImportTrainStops(data1)
+			err := tc.db.ReplaceAndImportStops(data1)
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))

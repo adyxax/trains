@@ -23,7 +23,7 @@ var allMigrations = []func(tx *sql.Tx) error{
 				created_at DATE DEFAULT (datetime('now')),
 				FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 			);
-			CREATE TABLE train_stops (
+			CREATE TABLE stops (
 				id TEXT PRIMARY KEY,
 				name TEXT NOT NULL
 			);`

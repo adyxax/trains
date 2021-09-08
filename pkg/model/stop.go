@@ -1,6 +1,6 @@
 package model
 
-type TrainStop struct {
+type Stop struct {
 	Id   string
 	Name string
 }

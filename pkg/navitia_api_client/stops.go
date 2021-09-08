@@ -8,7 +8,7 @@ import (
 	"git.adyxax.org/adyxax/trains/pkg/model"
 )
 
-type TrainStopsResponse struct {
+type StopsResponse struct {
 	Pagination struct {
 		StartPage    int `json:"start_page"`
 		ItemsOnPage  int `json:"items_on_page"`
@@ -31,11 +31,11 @@ type TrainStopsResponse struct {
 	Context        interface{}   `json:"context"`
 }
 
-func (c *NavitiaClient) GetTrainStops() (trainStops []model.TrainStop, err error) {
-	return getTrainStopsPage(c, 0)
+func (c *NavitiaClient) GetStops() (trainStops []model.Stop, err error) {
+	return getStopsPage(c, 0)
 }
 
-func getTrainStopsPage(c *NavitiaClient, i int) (trainStops []model.TrainStop, err error) {
+func getStopsPage(c *NavitiaClient, i int) (trainStops []model.Stop, err error) {
 	request := fmt.Sprintf("%s/coverage/sncf/stop_areas?count=1000&start_page=%d", c.baseURL, i)
 	req, err := http.NewRequest("GET", request, nil)
 	if err != nil {
@@ -47,24 +47,24 @@ func getTrainStopsPage(c *NavitiaClient, i int) (trainStops []model.TrainStop, e
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode == http.StatusOK {
-		var data TrainStopsResponse
+		var data StopsResponse
 		if err = json.NewDecoder(resp.Body).Decode(&data); err != nil {
-			return nil, newJsonDecodeError("GetTrainStops ", err)
+			return nil, newJsonDecodeError("GetStops ", err)
 		}
 		for i := 0; i < len(data.StopAreas); i++ {
 			if data.StopAreas[i].Label != "" {
-				trainStops = append(trainStops, model.TrainStop{data.StopAreas[i].ID, data.StopAreas[i].Label})
+				trainStops = append(trainStops, model.Stop{data.StopAreas[i].ID, data.StopAreas[i].Label})
 			}
 		}
 		if data.Pagination.ItemsOnPage+data.Pagination.ItemsPerPage*data.Pagination.StartPage < data.Pagination.TotalResult {
-			tss, err := getTrainStopsPage(c, i+1)
+			tss, err := getStopsPage(c, i+1)
 			if err != nil {
 				return nil, err
 			}
 			trainStops = append(trainStops, tss...)
 		}
 	} else {
-		err = newApiError(resp.StatusCode, "GetTrainStops")
+		err = newApiError(resp.StatusCode, "GetStops")
 	}
 	return
 }

@@ -12,7 +12,7 @@ import (
 
 type NavitiaMockClient struct {
 	departures []model.Departure
-	trainStops []model.TrainStop
+	trainStops []model.Stop
 	err        error
 }
 
@@ -20,7 +20,7 @@ func (c *NavitiaMockClient) GetDepartures(trainStop string) (departures []model.
 	return c.departures, c.err
 }
 
-func (c *NavitiaMockClient) GetTrainStops() (trainStops []model.TrainStop, err error) {
+func (c *NavitiaMockClient) GetStops() (trainStops []model.Stop, err error) {
 	return c.trainStops, c.err
 }
 

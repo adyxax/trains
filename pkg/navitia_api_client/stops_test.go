@@ -11,12 +11,12 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestGetTrainStops(t *testing.T) {
+func TestGetStops(t *testing.T) {
 	// Simple Test cases
 	testCases := []struct {
 		name           string
 		inputNewCLient string
-		expected       []model.TrainStop
+		expected       []model.Stop
 		expectedError  interface{}
 	}{
 		{"invalid characters in token should fail", "}", nil, &HttpClientError{}},
@@ -25,7 +25,7 @@ func TestGetTrainStops(t *testing.T) {
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			client := NewClient(tc.inputNewCLient)
-			valid, err := client.GetTrainStops()
+			valid, err := client.GetStops()
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
@@ -40,7 +40,7 @@ func TestGetTrainStops(t *testing.T) {
 	testCasesFilename := []struct {
 		name          string
 		inputFilename string
-		expected      []model.TrainStop
+		expected      []model.Stop
 		expectedError interface{}
 	}{
 		{"invalid json should fail", "test_data/invalid.json", nil, &JsonDecodeError{}},
@@ -49,7 +49,7 @@ func TestGetTrainStops(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			client, ts := newTestClientFromFilename(t, tc.inputFilename)
 			defer ts.Close()
-			valid, err := client.GetTrainStops()
+			valid, err := client.GetStops()
 			if tc.expectedError != nil {
 				require.Error(t, err)
 				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
@@ -65,14 +65,14 @@ func TestGetTrainStops(t *testing.T) {
 		w.WriteHeader(http.StatusNotFound)
 	}))
 	client := newTestClient(ts)
-	_, err := client.GetTrainStops()
+	_, err := client.GetStops()
 	if err == nil {
 		t.Fatalf("404 should raise an error")
 	}
 	// normal working request
 	client, ts = newTestClientFromFilename(t, "test_data/4-train-stops.json")
 	defer ts.Close()
-	trainStops, err := client.GetTrainStops()
+	trainStops, err := client.GetStops()
 	if err != nil {
 		t.Fatalf("could not get train stops : %s", err)
 	}
@@ -87,7 +87,7 @@ func TestGetTrainStops(t *testing.T) {
 		testClientCase{"/coverage/sncf/stop_areas?count=1000&start_page=2", "test_data/4-train-stops-page-2.json"},
 	})
 	defer ts.Close()
-	trainStops, err = client.GetTrainStops()
+	trainStops, err = client.GetStops()
 	if err != nil {
 		t.Fatalf("could not get train stops : %+v", err)
 	}
@@ -101,7 +101,7 @@ func TestGetTrainStops(t *testing.T) {
 		testClientCase{"/coverage/sncf/stop_areas?count=1000&start_page=1", "test_data/4-train-stops-page-1.json"},
 	})
 	defer ts.Close()
-	trainStops, err = client.GetTrainStops()
+	trainStops, err = client.GetStops()
 	if err == nil {
 		t.Fatalf("should not be able to get train stops : %+v", trainStops)
 	}
