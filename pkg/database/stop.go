@@ -28,6 +28,23 @@ func (env *DBEnv) GetStop(id string) (*model.Stop, error) {
 	return &stop, nil
 }
 
+func (env *DBEnv) GetStops() (stops []model.Stop, err error) {
+	query := `SELECT id, name FROM stops;`
+	rows, err := env.db.Query(query)
+	if err != nil {
+		return nil, newQueryError("Could not run database query", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var stop model.Stop
+		if err := rows.Scan(&stop.Id, &stop.Name); err != nil {
+			return nil, newQueryError("Could not run database query", err)
+		}
+		stops = append(stops, stop)
+	}
+	return
+}
+
 func (env *DBEnv) ReplaceAndImportStops(trainStops []model.Stop) error {
 	pre_query := `DELETE FROM stops;`
 	query := `
