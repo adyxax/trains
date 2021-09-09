@@ -11,7 +11,7 @@ import (
 )
 
 func TestCountStops(t *testing.T) {
-	trainStops := []model.Stop{
+	stops := []model.Stop{
 		model.Stop{Id: "id1", Name: "name1"},
 		model.Stop{Id: "id2", Name: "name2"},
 	}
@@ -25,14 +25,14 @@ func TestCountStops(t *testing.T) {
 	// normal check
 	err = db.Migrate()
 	require.NoError(t, err)
-	err = db.ReplaceAndImportStops(trainStops)
+	err = db.ReplaceAndImportStops(stops)
 	i, err = db.CountStops()
 	require.NoError(t, err)
-	assert.Equal(t, i, len(trainStops))
+	assert.Equal(t, i, len(stops))
 }
 
 func TestGetStop(t *testing.T) {
-	trainStops := []model.Stop{
+	stops := []model.Stop{
 		model.Stop{Id: "id1", Name: "name1"},
 		model.Stop{Id: "id2", Name: "name2"},
 	}
@@ -41,11 +41,11 @@ func TestGetStop(t *testing.T) {
 	require.NoError(t, err)
 	err = db.Migrate()
 	require.NoError(t, err)
-	err = db.ReplaceAndImportStops(trainStops)
+	err = db.ReplaceAndImportStops(stops)
 	// normal check
 	stop, err := db.GetStop("id1")
 	require.NoError(t, err)
-	assert.Equal(t, stop, &trainStops[0])
+	assert.Equal(t, stop, &stops[0])
 	// error check
 	stop, err = db.GetStop("non_existent")
 	require.Error(t, err)
