@@ -72,13 +72,13 @@ func TestGetStops(t *testing.T) {
 	// normal working request
 	client, ts = newTestClientFromFilename(t, "test_data/4-train-stops.json")
 	defer ts.Close()
-	trainStops, err := client.GetStops()
+	stops, err := client.GetStops()
 	if err != nil {
 		t.Fatalf("could not get train stops : %s", err)
 	}
 	// 4 records but one is empty (navitia api quirk)
-	if len(trainStops) != 3 {
-		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(trainStops))
+	if len(stops) != 3 {
+		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(stops))
 	}
 	// normal request in multiple pages
 	client, ts = newTestClientFromFilenames(t, []testClientCase{
@@ -87,13 +87,13 @@ func TestGetStops(t *testing.T) {
 		testClientCase{"/coverage/sncf/stop_areas?count=1000&start_page=2", "test_data/4-train-stops-page-2.json"},
 	})
 	defer ts.Close()
-	trainStops, err = client.GetStops()
+	stops, err = client.GetStops()
 	if err != nil {
 		t.Fatalf("could not get train stops : %+v", err)
 	}
 	// 12 records but one is empty (navitia api quirk)
-	if len(trainStops) != 11 {
-		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(trainStops))
+	if len(stops) != 11 {
+		t.Fatalf("did not decode train stops properly, got %d train stops when expected 4", len(stops))
 	}
 	// failing request in multiple pages with last one missing
 	client, ts = newTestClientFromFilenames(t, []testClientCase{
@@ -101,8 +101,8 @@ func TestGetStops(t *testing.T) {
 		testClientCase{"/coverage/sncf/stop_areas?count=1000&start_page=1", "test_data/4-train-stops-page-1.json"},
 	})
 	defer ts.Close()
-	trainStops, err = client.GetStops()
+	stops, err = client.GetStops()
 	if err == nil {
-		t.Fatalf("should not be able to get train stops : %+v", trainStops)
+		t.Fatalf("should not be able to get train stops : %+v", stops)
 	}
 }

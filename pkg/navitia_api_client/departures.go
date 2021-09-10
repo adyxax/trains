@@ -45,8 +45,8 @@ type DeparturesResponse struct {
 	} `json:"context"`
 }
 
-func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Departure, err error) {
-	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/%s/departures", c.baseURL, trainStop)
+func (c *NavitiaClient) GetDepartures(stop string) (departures []model.Departure, err error) {
+	request := fmt.Sprintf("%s/coverage/sncf/stop_areas/%s/departures", c.baseURL, stop)
 	start := time.Now()
 	c.mutex.Lock()
 	defer c.mutex.Unlock()
@@ -67,7 +67,7 @@ func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Depa
 	if resp.StatusCode == http.StatusOK {
 		var data DeparturesResponse
 		if err = json.NewDecoder(resp.Body).Decode(&data); err != nil {
-			return nil, newJsonDecodeError("GetDepartures "+trainStop, err)
+			return nil, newJsonDecodeError("GetDepartures "+stop, err)
 		}
 		// TODO test for no json error
 		// TODO handle pagination
@@ -83,7 +83,7 @@ func (c *NavitiaClient) GetDepartures(trainStop string) (departures []model.Depa
 			result: departures,
 		}
 	} else {
-		err = newApiError(resp.StatusCode, "GetDepartures "+trainStop)
+		err = newApiError(resp.StatusCode, "GetDepartures "+stop)
 	}
 	return
 }

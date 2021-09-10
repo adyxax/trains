@@ -21,9 +21,9 @@ func Run(c *config.Config, dbEnv *database.DBEnv) {
 
 	if i, err := dbEnv.CountStops(); err == nil && i == 0 {
 		log.Printf("No trains stops data found, updating...")
-		if trainStops, err := e.navitia.GetStops(); err == nil {
-			log.Printf("Updated trains stops data from navitia api, got %d results", len(trainStops))
-			if err = dbEnv.ReplaceAndImportStops(trainStops); err != nil {
+		if stops, err := e.navitia.GetStops(); err == nil {
+			log.Printf("Updated trains stops data from navitia api, got %d results", len(stops))
+			if err = dbEnv.ReplaceAndImportStops(stops); err != nil {
 				if dberr, ok := err.(*database.QueryError); ok {
 					log.Printf("%+v", dberr.Unwrap())
 				}

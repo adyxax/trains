@@ -45,7 +45,7 @@ func (env *DBEnv) GetStops() (stops []model.Stop, err error) {
 	return
 }
 
-func (env *DBEnv) ReplaceAndImportStops(trainStops []model.Stop) error {
+func (env *DBEnv) ReplaceAndImportStops(stops []model.Stop) error {
 	pre_query := `DELETE FROM stops;`
 	query := `
 		INSERT INTO stops
@@ -61,11 +61,11 @@ func (env *DBEnv) ReplaceAndImportStops(trainStops []model.Stop) error {
 		tx.Rollback()
 		return newQueryError("Could not run database query: most likely the schema is corrupted", err)
 	}
-	for i := 0; i < len(trainStops); i++ {
+	for i := 0; i < len(stops); i++ {
 		_, err = tx.Exec(
 			query,
-			trainStops[i].Id,
-			trainStops[i].Name,
+			stops[i].Id,
+			stops[i].Name,
 		)
 		if err != nil {
 			tx.Rollback()

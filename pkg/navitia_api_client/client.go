@@ -10,8 +10,8 @@ import (
 )
 
 type Client interface {
-	GetDepartures(trainStop string) (departures []model.Departure, err error)
-	GetStops() (trainStops []model.Stop, err error)
+	GetDepartures(stop string) (departures []model.Departure, err error)
+	GetStops() (stops []model.Stop, err error)
 }
 
 type NavitiaClient struct {

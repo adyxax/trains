@@ -31,11 +31,11 @@ type StopsResponse struct {
 	Context        interface{}   `json:"context"`
 }
 
-func (c *NavitiaClient) GetStops() (trainStops []model.Stop, err error) {
+func (c *NavitiaClient) GetStops() (stops []model.Stop, err error) {
 	return getStopsPage(c, 0)
 }
 
-func getStopsPage(c *NavitiaClient, i int) (trainStops []model.Stop, err error) {
+func getStopsPage(c *NavitiaClient, i int) (stops []model.Stop, err error) {
 	request := fmt.Sprintf("%s/coverage/sncf/stop_areas?count=1000&start_page=%d", c.baseURL, i)
 	req, err := http.NewRequest("GET", request, nil)
 	if err != nil {
@@ -53,7 +53,7 @@ func getStopsPage(c *NavitiaClient, i int) (trainStops []model.Stop, err error) 
 		}
 		for i := 0; i < len(data.StopAreas); i++ {
 			if data.StopAreas[i].Label != "" {
-				trainStops = append(trainStops, model.Stop{data.StopAreas[i].ID, data.StopAreas[i].Label})
+				stops = append(stops, model.Stop{data.StopAreas[i].ID, data.StopAreas[i].Label})
 			}
 		}
 		if data.Pagination.ItemsOnPage+data.Pagination.ItemsPerPage*data.Pagination.StartPage < data.Pagination.TotalResult {
@@ -61,7 +61,7 @@ func getStopsPage(c *NavitiaClient, i int) (trainStops []model.Stop, err error) 
 			if err != nil {
 				return nil, err
 			}
-			trainStops = append(trainStops, tss...)
+			stops = append(stops, tss...)
 		}
 	} else {
 		err = newApiError(resp.StatusCode, "GetStops")
