@@ -15,7 +15,6 @@ var rootTemplate = template.Must(template.ParseFS(templatesFS, "html/base.html",
 type Page struct {
 	User       *model.User
 	Departures []model.Departure
-	Title      string
 }
 
 // The root handler of the webui
@@ -36,7 +35,6 @@ func rootHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 		p := Page{
 			User:       user,
 			Departures: departures,
-			Title:      "Horaires des prochains trains à Crépieux la Pape",
 		}
 		err = rootTemplate.ExecuteTemplate(w, "root.html", p)
 		if err != nil {

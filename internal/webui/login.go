@@ -17,13 +17,15 @@ var validPassword = regexp.MustCompile(`^.+$`)
 
 var loginTemplate = template.Must(template.ParseFS(templatesFS, "html/base.html", "html/login.html"))
 
+type LoginPage struct{} // no variables to pass for now, but a previous error message would be good
+
 // The login handler of the webui
 func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 	if r.URL.Path == "/login" {
 		_, err := tryAndResumeSession(e, r)
 		if err == nil {
 			// already logged in
-			http.Redirect(w, r, "/", http.StatusFound)
+			http.Redirect(w, r, "/", http.StatusFound) // TODO fail some other way, at least check if username parameter matches the logged in user
 			return nil
 		}
 		switch r.Method {
@@ -73,7 +75,7 @@ func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			http.Redirect(w, r, "/", http.StatusFound)
 			return nil
 		case http.MethodGet:
-			p := Page{Title: "Login"}
+			p := LoginPage{}
 			err := loginTemplate.ExecuteTemplate(w, "login.html", p)
 			if err != nil {
 				return newStatusError(http.StatusInternalServerError, err)
