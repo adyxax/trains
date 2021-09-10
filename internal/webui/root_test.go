@@ -10,20 +10,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-type NavitiaMockClient struct {
-	departures []model.Departure
-	trainStops []model.Stop
-	err        error
-}
-
-func (c *NavitiaMockClient) GetDepartures(trainStop string) (departures []model.Departure, err error) {
-	return c.departures, c.err
-}
-
-func (c *NavitiaMockClient) GetStops() (trainStops []model.Stop, err error) {
-	return c.trainStops, c.err
-}
-
 func TestRootHandler(t *testing.T) {
 	// test environment setup
 	dbEnv, err := database.InitDB("sqlite3", "file::memory:?_foreign_keys=on")

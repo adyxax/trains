@@ -9,9 +9,24 @@ import (
 	"strings"
 	"testing"
 
+	"git.adyxax.org/adyxax/trains/pkg/model"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+type NavitiaMockClient struct {
+	departures []model.Departure
+	stops      []model.Stop
+	err        error
+}
+
+func (c *NavitiaMockClient) GetDepartures(stop string) (departures []model.Departure, err error) {
+	return c.departures, c.err
+}
+
+func (c *NavitiaMockClient) GetStops() (stops []model.Stop, err error) {
+	return c.stops, c.err
+}
 
 var simpleErrorMessage = fmt.Errorf("")
 
