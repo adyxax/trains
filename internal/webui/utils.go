@@ -2,6 +2,7 @@ package webui
 
 import (
 	"embed"
+	"html/template"
 	"log"
 	"net/http"
 
@@ -15,6 +16,13 @@ var templatesFS embed.FS
 
 //go:embed static/*
 var staticFS embed.FS
+
+// Template functions
+var funcMap = template.FuncMap{
+	"odd": func(i int) bool {
+		return i%2 == 1
+	},
+}
 
 // the environment that will be passed to our handlers
 type env struct {

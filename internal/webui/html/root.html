@@ -1,16 +1,9 @@
-{{ define "title"}}Horaires des prochains trains à Crépieux la Pape{{ end }}
+{{ define "title"}}Trains!{{ end }}
 {{ template "base" . }}
 
 {{ define "main" }}
-<h3>Horaires des prochains trains à Crépieux la Pape</h3>
-<table>
-	<thead>
-		<tr><th>Arrivée en gare</th><th>Direction</th></tr>
-	</thead>
-	<tbody>
-		{{ range .Departures }}
-		<tr{{ if .Odd }} style="color:#111111;"{{ end }}><td>{{ .Arrival }}</td><td>{{ .DisplayName }}</td></tr>
-		{{ end }}
-	</tbody>
-</table>
+<h3>Menu</h3>
+<ul>
+	<li><a href="/stop">Stop list</a></li>
+</ul>
 {{ end }}

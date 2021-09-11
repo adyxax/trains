@@ -3,18 +3,16 @@ package webui
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
 )
 
-var rootTemplate = template.Must(template.ParseFS(templatesFS, "html/base.html", "html/root.html"))
+var rootTemplate = template.Must(template.New("root").Funcs(funcMap).ParseFS(templatesFS, "html/base.html", "html/root.html"))
 
 // The page template variable
-type Page struct {
-	User       *model.User
-	Departures []model.Departure
+type RootPage struct {
+	User *model.User
 }
 
 // The root handler of the webui
@@ -25,16 +23,9 @@ func rootHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			http.Redirect(w, r, "/login", http.StatusFound)
 			return nil
 		}
-		var departures []model.Departure
-		if departures, err := e.navitia.GetDepartures(e.conf.TrainStop); err != nil {
-			log.Printf("%s; data returned: %+v\n", err, departures)
-			return newStatusError(http.StatusInternalServerError, fmt.Errorf("Could not get departures"))
-		} else {
-			w.Header().Set("Cache-Control", "no-store, no-cache")
-		}
-		p := Page{
-			User:       user,
-			Departures: departures,
+		w.Header().Set("Cache-Control", "no-store, no-cache")
+		p := RootPage{
+			User: user,
 		}
 		err = rootTemplate.ExecuteTemplate(w, "root.html", p)
 		if err != nil {

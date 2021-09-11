@@ -10,7 +10,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestRootHandler(t *testing.T) {
+func TestSpecificStopHandler(t *testing.T) {
 	// test environment setup
 	dbEnv, err := database.InitDB("sqlite3", "file::memory:?_foreign_keys=on")
 	require.Nil(t, err)
@@ -22,32 +22,41 @@ func TestRootHandler(t *testing.T) {
 	require.Nil(t, err)
 	token1, err := dbEnv.CreateSession(user1)
 	require.Nil(t, err)
+	err = dbEnv.ReplaceAndImportStops([]model.Stop{model.Stop{Id: "stop_area:test:01", Name: "test"}})
+	require.Nil(t, err)
 	e := env{
 		dbEnv: dbEnv,
 		conf:  &config.Config{},
 	}
+	departures1 := []model.Departure{
+		model.Departure{
+			Direction: "test direction",
+			Arrival:   "20210503T150405",
+		},
+	}
+	e.navitia = &NavitiaMockClient{departures: departures1, err: nil}
 	// test GET requests
-	runHttpTest(t, &e, rootHandler, &httpTestCase{
+	runHttpTest(t, &e, specificStopHandler, &httpTestCase{
 		name: "a simple get when not logged in should redirect to the login page",
 		input: httpTestInput{
 			method: http.MethodGet,
-			path:   "/",
+			path:   "/stop/stop_area:test:01",
 		},
 		expect: httpTestExpect{
 			code:     http.StatusFound,
 			location: "/login",
 		},
 	})
-	runHttpTest(t, &e, rootHandler, &httpTestCase{
-		name: "a simple get when logged in should display the menu",
+	runHttpTest(t, &e, specificStopHandler, &httpTestCase{
+		name: "a get of a subpath when logged in should display the departure times",
 		input: httpTestInput{
 			method: http.MethodGet,
-			path:   "/",
+			path:   "/stop/stop_area:test:01",
 			cookie: &http.Cookie{Name: sessionCookieName, Value: *token1},
 		},
 		expect: httpTestExpect{
 			code:       http.StatusOK,
-			bodyString: "Menu",
+			bodyString: "Horaires des prochains trains à test",
 		},
 	})
 }

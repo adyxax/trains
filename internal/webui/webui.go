@@ -18,6 +18,8 @@ func Run(c *config.Config, dbEnv *database.DBEnv) {
 	http.Handle("/", handler{&e, rootHandler})
 	http.Handle("/login", handler{&e, loginHandler})
 	http.Handle("/static/", http.FileServer(http.FS(staticFS)))
+	http.Handle("/stop", handler{&e, stopHandler})
+	http.Handle("/stop/", handler{&e, specificStopHandler})
 
 	if i, err := dbEnv.CountStops(); err == nil && i == 0 {
 		log.Printf("No trains stops data found, updating...")

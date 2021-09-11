@@ -1,0 +1,11 @@
+{{ define "title"}}Choisir une gare{{ end }}
+{{ template "base" . }}
+
+{{ define "main" }}
+<h3>Choisir une gare</h3>
+<ul>
+	{{ range $i, $elt := .Stops }}
+	<li {{ if odd $i }}style="background-color:lightgray;"{{ end }}><a href="/stop/{{ $elt.Id }}">{{ $elt.Name  }}</a></li>
+	{{ end }}
+</ul>
+{{ end }}

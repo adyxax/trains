@@ -1,0 +1,16 @@
+{{ define "title"}}Horaires des prochains trains à {{ .Stop }}{{ end }}
+{{ template "base" . }}
+
+{{ define "main" }}
+<h3>Horaires des prochains trains à {{ .Stop }}</h3>
+<table>
+	<thead>
+		<tr><th>Arrivée en gare</th><th>Direction</th></tr>
+	</thead>
+	<tbody>
+		{{ range $i, $elt := .Departures }}
+		<tr{{ if odd $i }} style="color:#111111;"{{ end }}><td>{{ .Arrival }}</td><td>{{ .Direction }}</td></tr>
+		{{ end }}
+	</tbody>
+</table>
+{{ end }}

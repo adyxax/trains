@@ -90,18 +90,3 @@ func newInvalidTokenError(token string) error {
 		token: token,
 	}
 }
-
-// Invalid trainStop field error
-type InvalidTrainStopError struct {
-	trainStop string
-}
-
-func (e *InvalidTrainStopError) Error() string {
-	return fmt.Sprintf("Invalid trainStop %s : it must be a string that lookslike \"stop_area:SNCF:87723502\" (make sure to quote the string because of the colon characters)", e.trainStop)
-}
-
-func newInvalidTrainStopError(trainStop string) error {
-	return &InvalidTrainStopError{
-		trainStop: trainStop,
-	}
-}
