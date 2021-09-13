@@ -6,7 +6,6 @@ import (
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -45,11 +44,11 @@ func TestCreateUser(t *testing.T) {
 			valid, err := db.CreateUser(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
-				assert.Equal(t, tc.expected, valid.Id)
+				require.Equal(t, tc.expected, valid.Id)
 			}
 		})
 	}
@@ -59,29 +58,23 @@ func TestCreateUser(t *testing.T) {
 	passwordFunction = bcrypt.GenerateFromPassword
 	require.Error(t, err)
 	require.Nil(t, valid)
-	assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}))
+	require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}))
 }
 
 func TestCreateUserWithSQLMock(t *testing.T) {
 	// Transaction begin error
 	dbBeginError, _, err := sqlmock.New()
-	if err != nil {
-		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-	}
+	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbBeginError.Close()
 	// Transaction LastInsertId not supported
 	dbLastInsertIdError, mockLastInsertIdError, err := sqlmock.New()
-	if err != nil {
-		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-	}
+	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbLastInsertIdError.Close()
 	mockLastInsertIdError.ExpectBegin()
 	mockLastInsertIdError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewErrorResult(&TransactionError{"test", nil}))
 	// Transaction commit error
 	dbCommitError, mockCommitError, err := sqlmock.New()
-	if err != nil {
-		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-	}
+	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbCommitError.Close()
 	mockCommitError.ExpectBegin()
 	mockCommitError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewResult(1, 1))
@@ -100,7 +93,7 @@ func TestCreateUserWithSQLMock(t *testing.T) {
 			valid, err := tc.db.CreateUser(&model.UserRegistration{})
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
@@ -163,11 +156,11 @@ func TestLogin(t *testing.T) {
 			valid, err := db.Login(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
-				assert.Equal(t, tc.input.Username, valid.Username)
+				require.Equal(t, tc.input.Username, valid.Username)
 			}
 		})
 	}

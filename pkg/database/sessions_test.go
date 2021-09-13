@@ -1,12 +1,10 @@
 package database
 
 import (
-	"reflect"
 	"testing"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
 	"github.com/DATA-DOG/go-sqlmock"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -29,7 +27,7 @@ func TestCreateSession(t *testing.T) {
 	testCases := []struct {
 		name          string
 		input         *model.User
-		expectedError interface{}
+		expectedError error
 	}{
 		{"Normal user", user1, nil},
 		{"A normal user can request multiple tokens", user1, nil},
@@ -40,11 +38,11 @@ func TestCreateSession(t *testing.T) {
 			valid, err := db.CreateSession(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				requireErrorTypeMatch(t, err, tc.expectedError)
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
-				assert.NotNil(t, valid)
+				require.NotNil(t, valid)
 			}
 		})
 	}
@@ -53,15 +51,11 @@ func TestCreateSession(t *testing.T) {
 func TestCreateSessionWithSQLMock(t *testing.T) {
 	// Transaction begin error
 	dbBeginError, _, err := sqlmock.New()
-	if err != nil {
-		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-	}
+	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbBeginError.Close()
 	// Transaction commit error
 	dbCommitError, mockCommitError, err := sqlmock.New()
-	if err != nil {
-		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
-	}
+	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbCommitError.Close()
 	mockCommitError.ExpectBegin()
 	mockCommitError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewResult(1, 1))
@@ -69,7 +63,7 @@ func TestCreateSessionWithSQLMock(t *testing.T) {
 	testCases := []struct {
 		name          string
 		db            *DBEnv
-		expectedError interface{}
+		expectedError error
 	}{
 		{"begin transaction error", &DBEnv{db: dbBeginError}, &TransactionError{}},
 		{"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
@@ -79,7 +73,7 @@ func TestCreateSessionWithSQLMock(t *testing.T) {
 			valid, err := tc.db.CreateSession(&model.User{})
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				requireErrorTypeMatch(t, err, tc.expectedError)
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
@@ -126,7 +120,7 @@ func TestResumeSession(t *testing.T) {
 		name          string
 		input         string
 		expected      *model.User
-		expectedError interface{}
+		expectedError error
 	}{
 		{"Normal user resume", *token1, user1, nil},
 		{"Normal user resume 1bis", *token1bis, user1, nil},
@@ -138,12 +132,12 @@ func TestResumeSession(t *testing.T) {
 			valid, err := db.ResumeSession(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
 				require.Nil(t, valid)
+				requireErrorTypeMatch(t, err, tc.expectedError)
 			} else {
 				require.NoError(t, err)
-				assert.NotNil(t, valid)
-				assert.Equal(t, valid.Id, tc.expected.Id)
+				require.NotNil(t, valid)
+				require.Equal(t, valid.Id, tc.expected.Id)
 			}
 		})
 	}

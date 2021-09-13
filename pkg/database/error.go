@@ -8,10 +8,10 @@ type InitError struct {
 	err  error
 }
 
-func (e *InitError) Error() string {
+func (e InitError) Error() string {
 	return fmt.Sprintf("Failed to open database : %s", e.path)
 }
-func (e *InitError) Unwrap() error { return e.err }
+func (e InitError) Unwrap() error { return e.err }
 
 func newInitError(path string, err error) error {
 	return &InitError{
@@ -26,10 +26,10 @@ type MigrationError struct {
 	err     error
 }
 
-func (e *MigrationError) Error() string {
+func (e MigrationError) Error() string {
 	return fmt.Sprintf("Failed to migrate database to version %d : %s", e.version, e.err)
 }
-func (e *MigrationError) Unwrap() error { return e.err }
+func (e MigrationError) Unwrap() error { return e.err }
 
 func newMigrationError(version int, err error) error {
 	return &MigrationError{
@@ -43,10 +43,10 @@ type PasswordError struct {
 	err error
 }
 
-func (e *PasswordError) Error() string {
+func (e PasswordError) Error() string {
 	return fmt.Sprintf("Failed to hash password : %+v", e.err)
 }
-func (e *PasswordError) Unwrap() error { return e.err }
+func (e PasswordError) Unwrap() error { return e.err }
 
 func newPasswordError(err error) error {
 	return &PasswordError{
@@ -60,10 +60,10 @@ type QueryError struct {
 	err error
 }
 
-func (e *QueryError) Error() string {
+func (e QueryError) Error() string {
 	return fmt.Sprintf("Failed to perform query : %s", e.msg)
 }
-func (e *QueryError) Unwrap() error { return e.err }
+func (e QueryError) Unwrap() error { return e.err }
 
 func newQueryError(msg string, err error) error {
 	return &QueryError{
@@ -78,10 +78,10 @@ type TransactionError struct {
 	err error
 }
 
-func (e *TransactionError) Error() string {
+func (e TransactionError) Error() string {
 	return fmt.Sprintf("Failed to perform query : %s", e.msg)
 }
-func (e *TransactionError) Unwrap() error { return e.err }
+func (e TransactionError) Unwrap() error { return e.err }
 
 func newTransactionError(msg string, err error) error {
 	return &TransactionError{
