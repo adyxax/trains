@@ -20,7 +20,7 @@ func TestCountStops(t *testing.T) {
 	// check sql error
 	i, err := db.CountStops()
 	require.Error(t, err)
-	requireErrorTypeMatch(t, err, &QueryError{})
+	requireErrorTypeMatch(t, err, QueryError{})
 	// normal check
 	err = db.Migrate()
 	require.NoError(t, err)
@@ -48,7 +48,7 @@ func TestGetStop(t *testing.T) {
 	// error check
 	stop, err = db.GetStop("non_existent")
 	require.Error(t, err)
-	requireErrorTypeMatch(t, err, &QueryError{})
+	requireErrorTypeMatch(t, err, QueryError{})
 }
 
 func TestGetStops(t *testing.T) {
@@ -62,7 +62,7 @@ func TestGetStops(t *testing.T) {
 	// error check
 	res, err := db.GetStops()
 	require.Error(t, err)
-	requireErrorTypeMatch(t, err, &QueryError{})
+	requireErrorTypeMatch(t, err, QueryError{})
 	// normal check
 	err = db.Migrate()
 	require.NoError(t, err)
@@ -79,7 +79,7 @@ func TestGetStopsWithSQLMock(t *testing.T) {
 	mock.ExpectQuery(`SELECT id, name FROM stops;`).WillReturnRows(sqlmock.NewRows([]string{"id", "name"}).AddRow(nil, "b").RowError(1, fmt.Errorf("row error")))
 	_, err = (&DBEnv{db: db}).GetStops()
 	require.Error(t, err)
-	requireErrorTypeMatch(t, err, &QueryError{})
+	requireErrorTypeMatch(t, err, QueryError{})
 }
 
 func TestReplaceAndImportStops(t *testing.T) {
@@ -154,10 +154,10 @@ func TestReplaceAndImportStopsWithSQLMock(t *testing.T) {
 		db            *DBEnv
 		expectedError error
 	}{
-		{"begin transaction error", &DBEnv{db: dbBeginError}, &TransactionError{}},
-		{"query error cannot delete from", &DBEnv{db: dbCannotDeleteFrom}, &QueryError{}},
-		{"query error cannot insert into", &DBEnv{db: dbCannotInsertError}, &QueryError{}},
-		{"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
+		{"begin transaction error", &DBEnv{db: dbBeginError}, TransactionError{}},
+		{"query error cannot delete from", &DBEnv{db: dbCannotDeleteFrom}, QueryError{}},
+		{"query error cannot insert into", &DBEnv{db: dbCannotInsertError}, QueryError{}},
+		{"commit transaction error", &DBEnv{db: dbCommitError}, TransactionError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {

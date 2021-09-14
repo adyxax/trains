@@ -14,7 +14,7 @@ func (e InitError) Error() string {
 func (e InitError) Unwrap() error { return e.err }
 
 func newInitError(path string, err error) error {
-	return &InitError{
+	return InitError{
 		path: path,
 		err:  err,
 	}
@@ -32,7 +32,7 @@ func (e MigrationError) Error() string {
 func (e MigrationError) Unwrap() error { return e.err }
 
 func newMigrationError(version int, err error) error {
-	return &MigrationError{
+	return MigrationError{
 		version: version,
 		err:     err,
 	}
@@ -49,7 +49,7 @@ func (e PasswordError) Error() string {
 func (e PasswordError) Unwrap() error { return e.err }
 
 func newPasswordError(err error) error {
-	return &PasswordError{
+	return PasswordError{
 		err: err,
 	}
 }
@@ -66,7 +66,7 @@ func (e QueryError) Error() string {
 func (e QueryError) Unwrap() error { return e.err }
 
 func newQueryError(msg string, err error) error {
-	return &QueryError{
+	return QueryError{
 		msg: msg,
 		err: err,
 	}
@@ -84,7 +84,7 @@ func (e TransactionError) Error() string {
 func (e TransactionError) Unwrap() error { return e.err }
 
 func newTransactionError(msg string, err error) error {
-	return &TransactionError{
+	return TransactionError{
 		msg: msg,
 		err: err,
 	}

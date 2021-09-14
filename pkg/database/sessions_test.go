@@ -31,7 +31,7 @@ func TestCreateSession(t *testing.T) {
 	}{
 		{"Normal user", user1, nil},
 		{"A normal user can request multiple tokens", user1, nil},
-		{"a non existant user id triggers an error", &user2, &QueryError{}},
+		{"a non existant user id triggers an error", &user2, QueryError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -65,8 +65,8 @@ func TestCreateSessionWithSQLMock(t *testing.T) {
 		db            *DBEnv
 		expectedError error
 	}{
-		{"begin transaction error", &DBEnv{db: dbBeginError}, &TransactionError{}},
-		{"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
+		{"begin transaction error", &DBEnv{db: dbBeginError}, TransactionError{}},
+		{"commit transaction error", &DBEnv{db: dbCommitError}, TransactionError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -125,7 +125,7 @@ func TestResumeSession(t *testing.T) {
 		{"Normal user resume", *token1, user1, nil},
 		{"Normal user resume 1bis", *token1bis, user1, nil},
 		{"Normal user resume 2", *token2, user2, nil},
-		{"a non existant user token triggers an error", "XXX", nil, &QueryError{}},
+		{"a non existant user token triggers an error", "XXX", nil, QueryError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {

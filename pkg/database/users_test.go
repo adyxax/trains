@@ -1,7 +1,6 @@
 package database
 
 import (
-	"reflect"
 	"testing"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
@@ -33,10 +32,10 @@ func TestCreateUser(t *testing.T) {
 		name          string
 		input         *model.UserRegistration
 		expected      int
-		expectedError interface{}
+		expectedError error
 	}{
 		{"Normal user", &normalUser, 1, nil},
-		{"Duplicate user", &normalUser, 0, &QueryError{}},
+		{"Duplicate user", &normalUser, 0, QueryError{}},
 		{"Normal user 2", &normalUser2, 2, nil},
 	}
 	for _, tc := range testCases {
@@ -44,7 +43,7 @@ func TestCreateUser(t *testing.T) {
 			valid, err := db.CreateUser(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				requireErrorTypeMatch(t, err, tc.expectedError)
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
@@ -58,7 +57,7 @@ func TestCreateUser(t *testing.T) {
 	passwordFunction = bcrypt.GenerateFromPassword
 	require.Error(t, err)
 	require.Nil(t, valid)
-	require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(&PasswordError{}))
+	requireErrorTypeMatch(t, err, PasswordError{})
 }
 
 func TestCreateUserWithSQLMock(t *testing.T) {
@@ -71,7 +70,7 @@ func TestCreateUserWithSQLMock(t *testing.T) {
 	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
 	defer dbLastInsertIdError.Close()
 	mockLastInsertIdError.ExpectBegin()
-	mockLastInsertIdError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewErrorResult(&TransactionError{"test", nil}))
+	mockLastInsertIdError.ExpectExec(`INSERT INTO`).WillReturnResult(sqlmock.NewErrorResult(TransactionError{"test", nil}))
 	// Transaction commit error
 	dbCommitError, mockCommitError, err := sqlmock.New()
 	require.NoError(t, err, "an error '%s' was not expected when opening a stub database connection", err)
@@ -82,18 +81,18 @@ func TestCreateUserWithSQLMock(t *testing.T) {
 	testCases := []struct {
 		name          string
 		db            *DBEnv
-		expectedError interface{}
+		expectedError error
 	}{
-		{"begin transaction error", &DBEnv{db: dbBeginError}, &TransactionError{}},
-		{"last insert id transaction error", &DBEnv{db: dbLastInsertIdError}, &TransactionError{}},
-		{"commit transaction error", &DBEnv{db: dbCommitError}, &TransactionError{}},
+		{"begin transaction error", &DBEnv{db: dbBeginError}, TransactionError{}},
+		{"last insert id transaction error", &DBEnv{db: dbLastInsertIdError}, TransactionError{}},
+		{"commit transaction error", &DBEnv{db: dbCommitError}, TransactionError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			valid, err := tc.db.CreateUser(&model.UserRegistration{})
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				requireErrorTypeMatch(t, err, tc.expectedError)
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)
@@ -144,19 +143,19 @@ func TestLogin(t *testing.T) {
 	testCases := []struct {
 		name          string
 		input         *model.UserLogin
-		expectedError interface{}
+		expectedError error
 	}{
 		{"login user1", &loginUser1, nil},
 		{"login user2", &loginUser2, nil},
-		{"failed login", &failedUser1, &PasswordError{}},
-		{"query error", &queryError, &QueryError{}},
+		{"failed login", &failedUser1, PasswordError{}},
+		{"query error", &queryError, QueryError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
 			valid, err := db.Login(tc.input)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
+				requireErrorTypeMatch(t, err, tc.expectedError)
 				require.Nil(t, valid)
 			} else {
 				require.NoError(t, err)

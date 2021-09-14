@@ -17,8 +17,8 @@ func TestInitDB(t *testing.T) {
 		dsn           string
 		expectedError error
 	}{
-		{"Invalid dbType", "non-existant", "test", &InitError{}},
-		{"Non existant path", "sqlite3", "/non-existant/non-existant", &InitError{}},
+		{"Invalid dbType", "non-existant", "test", InitError{}},
+		{"Non existant path", "sqlite3", "/non-existant/non-existant", InitError{}},
 		{"Working DB", "sqlite3", "file::memory:?_foreign_keys=on", nil},
 	}
 	for _, tc := range testCases {
@@ -50,7 +50,7 @@ func TestMigrate(t *testing.T) {
 	onlyFirstMigration := []func(tx *sql.Tx) error{migrations[0]}
 	notFromScratchMigration := []func(tx *sql.Tx) error{
 		func(tx *sql.Tx) (err error) {
-			return &MigrationError{version: 1, err: nil}
+			return MigrationError{version: 1, err: nil}
 		},
 		func(tx *sql.Tx) (err error) {
 			return nil
@@ -71,8 +71,8 @@ func TestMigrate(t *testing.T) {
 		migrs         []func(tx *sql.Tx) error
 		expectedError error
 	}{
-		{"bad migration", "file::memory:?_foreign_keys=on", badMigration, &MigrationError{}},
-		{"no schema_version migration", "file::memory:?_foreign_keys=on", noSchemaVersionMigration, &MigrationError{}},
+		{"bad migration", "file::memory:?_foreign_keys=on", badMigration, MigrationError{}},
+		{"no schema_version migration", "file::memory:?_foreign_keys=on", noSchemaVersionMigration, MigrationError{}},
 		{"not from scratch", "file:testfile_notFromScratch.db?_foreign_keys=on", notFromScratchMigration, nil},
 		{"from scratch", "file::memory:?_foreign_keys=on", allMigrations, nil},
 	}
@@ -115,8 +115,8 @@ func TestMigrateWithSQLMock(t *testing.T) {
 		migrs         []func(tx *sql.Tx) error
 		expectedError error
 	}{
-		{"begin transaction error", &DBEnv{db: dbBeginError}, fakeMigration, &TransactionError{}},
-		{"commit transaction error", &DBEnv{db: dbCommitError}, fakeMigration, &TransactionError{}},
+		{"begin transaction error", &DBEnv{db: dbBeginError}, fakeMigration, TransactionError{}},
+		{"commit transaction error", &DBEnv{db: dbCommitError}, fakeMigration, TransactionError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
