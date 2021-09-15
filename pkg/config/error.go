@@ -2,21 +2,19 @@ package config
 
 import "fmt"
 
-type ErrorType int
-
 // file open configuration file error
 type OpenError struct {
 	path string
 	err  error
 }
 
-func (e *OpenError) Error() string {
+func (e OpenError) Error() string {
 	return fmt.Sprintf("Failed to open configuration file : %s", e.path)
 }
-func (e *OpenError) Unwrap() error { return e.err }
+func (e OpenError) Unwrap() error { return e.err }
 
 func newOpenError(path string, err error) error {
-	return &OpenError{
+	return OpenError{
 		path: path,
 		err:  err,
 	}
@@ -28,13 +26,13 @@ type DecodeError struct {
 	err  error
 }
 
-func (e *DecodeError) Error() string {
+func (e DecodeError) Error() string {
 	return fmt.Sprintf("Failed to decode configuration file : %s", e.path)
 }
-func (e *DecodeError) Unwrap() error { return e.err }
+func (e DecodeError) Unwrap() error { return e.err }
 
 func newDecodeError(path string, err error) error {
-	return &DecodeError{
+	return DecodeError{
 		path: path,
 		err:  err,
 	}
@@ -46,13 +44,13 @@ type InvalidAddressError struct {
 	err     error
 }
 
-func (e *InvalidAddressError) Error() string {
+func (e InvalidAddressError) Error() string {
 	return fmt.Sprintf("Invalid address %s : it must be a valid ipv4 address, ipv6 address, or resolvable name", e.address)
 }
-func (e *InvalidAddressError) Unwrap() error { return e.err }
+func (e InvalidAddressError) Unwrap() error { return e.err }
 
 func newInvalidAddressError(address string, err error) error {
-	return &InvalidAddressError{
+	return InvalidAddressError{
 		address: address,
 		err:     err,
 	}
@@ -64,13 +62,13 @@ type InvalidPortError struct {
 	err  error
 }
 
-func (e *InvalidPortError) Error() string {
+func (e InvalidPortError) Error() string {
 	return fmt.Sprintf("Invalid port %s : it must be a valid port number or tcp service name", e.port)
 }
-func (e *InvalidPortError) Unwrap() error { return e.err }
+func (e InvalidPortError) Unwrap() error { return e.err }
 
 func newInvalidPortError(port string, err error) error {
-	return &InvalidPortError{
+	return InvalidPortError{
 		port: port,
 		err:  err,
 	}
@@ -81,12 +79,12 @@ type InvalidTokenError struct {
 	token string
 }
 
-func (e *InvalidTokenError) Error() string {
+func (e InvalidTokenError) Error() string {
 	return fmt.Sprintf("Invalid token %s : it must be an hexadecimal string that lookslike 12345678-9abc-def0-1234-56789abcdef0", e.token)
 }
 
 func newInvalidTokenError(token string) error {
-	return &InvalidTokenError{
+	return InvalidTokenError{
 		token: token,
 	}
 }
