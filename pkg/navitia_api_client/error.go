@@ -8,12 +8,12 @@ type ApiError struct {
 	request string
 }
 
-func (e *ApiError) Error() string {
+func (e ApiError) Error() string {
 	return fmt.Sprintf("Navitia Api error return code %d - %s", e.code, e.request)
 }
 
 func newApiError(code int, request string) error {
-	return &ApiError{
+	return ApiError{
 		code:    code,
 		request: request,
 	}
@@ -25,11 +25,11 @@ type HttpClientError struct {
 	err error
 }
 
-func (e *HttpClientError) Error() string { return fmt.Sprintf("Navitia HttpClient error %s", e.msg) }
-func (e *HttpClientError) Unwrap() error { return e.err }
+func (e HttpClientError) Error() string { return fmt.Sprintf("Navitia HttpClient error %s", e.msg) }
+func (e HttpClientError) Unwrap() error { return e.err }
 
 func newHttpClientError(msg string, err error) error {
-	return &HttpClientError{
+	return HttpClientError{
 		msg: msg,
 		err: err,
 	}
@@ -41,11 +41,11 @@ type JsonDecodeError struct {
 	err error
 }
 
-func (e *JsonDecodeError) Error() string { return fmt.Sprintf("Navitia JsonDecode error %s", e.msg) }
-func (e *JsonDecodeError) Unwrap() error { return e.err }
+func (e JsonDecodeError) Error() string { return fmt.Sprintf("Navitia JsonDecode error %s", e.msg) }
+func (e JsonDecodeError) Unwrap() error { return e.err }
 
 func newJsonDecodeError(msg string, err error) error {
-	return &JsonDecodeError{
+	return JsonDecodeError{
 		msg: msg,
 		err: err,
 	}
@@ -57,13 +57,13 @@ type DateParsingError struct {
 	err  error
 }
 
-func (e *DateParsingError) Error() string {
+func (e DateParsingError) Error() string {
 	return fmt.Sprintf("Navitia date parsing error %s", e.date)
 }
-func (e *DateParsingError) Unwrap() error { return e.err }
+func (e DateParsingError) Unwrap() error { return e.err }
 
 func newDateParsingError(date string, err error) error {
-	return &DateParsingError{
+	return DateParsingError{
 		date: date,
 		err:  err,
 	}

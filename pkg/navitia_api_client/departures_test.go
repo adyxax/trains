@@ -3,11 +3,9 @@ package navitia_api_client
 import (
 	"net/http"
 	"net/http/httptest"
-	"reflect"
 	"testing"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -18,10 +16,10 @@ func TestGetDepartures(t *testing.T) {
 		inputNewCLient     string
 		inputGetDepartures string
 		expected           []model.Departure
-		expectedError      interface{}
+		expectedError      error
 	}{
-		{"invalid characters in token should fail", "}", "test", nil, &HttpClientError{}},
-		{"unreachable server should fail", "https://", "test", nil, &HttpClientError{}},
+		{"invalid characters in token should fail", "}", "test", nil, HttpClientError{}},
+		{"unreachable server should fail", "https://", "test", nil, HttpClientError{}},
 	}
 	for _, tc := range testCases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -29,11 +27,11 @@ func TestGetDepartures(t *testing.T) {
 			valid, err := client.GetDepartures(tc.inputGetDepartures)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
-				assert.Equal(t, tc.expected, valid)
+				requireErrorTypeMatch(t, err, tc.expectedError)
+				require.Equal(t, tc.expected, valid)
 			} else {
 				require.NoError(t, err)
-				assert.Equal(t, tc.expected, valid)
+				require.Equal(t, tc.expected, valid)
 			}
 		})
 	}
@@ -43,10 +41,10 @@ func TestGetDepartures(t *testing.T) {
 		inputFilename      string
 		inputGetDepartures string
 		expected           []model.Departure
-		expectedError      interface{}
+		expectedError      error
 	}{
-		{"invalid json should fail", "test_data/invalid.json", "test", nil, &JsonDecodeError{}},
-		{"invalid date should fail", "test_data/invalid_date.json", "test", nil, &DateParsingError{}},
+		{"invalid json should fail", "test_data/invalid.json", "test", nil, JsonDecodeError{}},
+		{"invalid date should fail", "test_data/invalid_date.json", "test", nil, DateParsingError{}},
 	}
 	for _, tc := range testCasesFilename {
 		t.Run(tc.name, func(t *testing.T) {
@@ -55,11 +53,11 @@ func TestGetDepartures(t *testing.T) {
 			valid, err := client.GetDepartures(tc.inputGetDepartures)
 			if tc.expectedError != nil {
 				require.Error(t, err)
-				assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expectedError), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expectedError))
-				assert.Equal(t, tc.expected, valid)
+				requireErrorTypeMatch(t, err, tc.expectedError)
+				require.Equal(t, tc.expected, valid)
 			} else {
 				require.NoError(t, err)
-				assert.Equal(t, tc.expected, valid)
+				require.Equal(t, tc.expected, valid)
 			}
 		})
 	}
