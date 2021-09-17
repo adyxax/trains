@@ -10,9 +10,12 @@ import (
 	"testing"
 
 	"git.adyxax.org/adyxax/trains/pkg/model"
-	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+func requireErrorTypeMatch(t *testing.T, err error, expected error) {
+	require.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(expected), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(expected))
+}
 
 type NavitiaMockClient struct {
 	departures []model.Departure
@@ -46,7 +49,7 @@ type httpTestExpect struct {
 	bodyString string
 	location   string
 	setsCookie bool
-	err        interface{}
+	err        error
 }
 
 func runHttpTest(t *testing.T, e *env, h func(e *env, w http.ResponseWriter, r *http.Request) error, tc *httpTestCase) {
@@ -64,22 +67,22 @@ func runHttpTest(t *testing.T, e *env, h func(e *env, w http.ResponseWriter, r *
 		err := h(e, rr, req)
 		if tc.expect.err != nil {
 			require.Error(t, err)
-			assert.Equalf(t, reflect.TypeOf(err), reflect.TypeOf(tc.expect.err), "Invalid error type. Got %s but expected %s", reflect.TypeOf(err), reflect.TypeOf(tc.expect.err))
+			requireErrorTypeMatch(t, err, tc.expect.err)
 		} else {
 			require.NoError(t, err)
-			assert.Equal(t, tc.expect.code, rr.Code)
+			require.Equal(t, tc.expect.code, rr.Code)
 			if tc.expect.bodyString != "" {
-				assert.Contains(t, rr.Body.String(), tc.expect.bodyString)
+				require.Contains(t, rr.Body.String(), tc.expect.bodyString)
 			}
 			if tc.expect.location != "" {
-				assert.Contains(t, rr.HeaderMap, "Location")
-				assert.Len(t, rr.HeaderMap["Location"], 1)
-				assert.Equal(t, rr.HeaderMap["Location"][0], tc.expect.location)
+				require.Contains(t, rr.HeaderMap, "Location")
+				require.Len(t, rr.HeaderMap["Location"], 1)
+				require.Equal(t, rr.HeaderMap["Location"][0], tc.expect.location)
 			}
 			if tc.expect.setsCookie {
-				assert.Contains(t, rr.HeaderMap, "Set-Cookie")
+				require.Contains(t, rr.HeaderMap, "Set-Cookie")
 			} else {
-				assert.NotContains(t, rr.HeaderMap, "Set-Cookie")
+				require.NotContains(t, rr.HeaderMap, "Set-Cookie")
 			}
 		}
 	})

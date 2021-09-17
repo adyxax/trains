@@ -57,10 +57,10 @@ func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			user, err := e.dbEnv.Login(&model.UserLogin{Username: username[0], Password: password[0]})
 			if err != nil {
 				switch e := err.(type) {
-				case *database.PasswordError:
+				case database.PasswordError:
 					// TODO : handle in page
 					return e
-				case *database.QueryError:
+				case database.QueryError:
 					return e
 				default:
 					return e

@@ -26,7 +26,7 @@ func Run(c *config.Config, dbEnv *database.DBEnv) {
 		if stops, err := e.navitia.GetStops(); err == nil {
 			log.Printf("Updated trains stops data from navitia api, got %d results", len(stops))
 			if err = dbEnv.ReplaceAndImportStops(stops); err != nil {
-				if dberr, ok := err.(*database.QueryError); ok {
+				if dberr, ok := err.(database.QueryError); ok {
 					log.Printf("%+v", dberr.Unwrap())
 				}
 			}

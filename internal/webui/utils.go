@@ -41,8 +41,8 @@ type statusError struct {
 	err  error
 }
 
-func (e *statusError) Error() string           { return e.err.Error() }
-func (e *statusError) Status() int             { return e.code }
+func (e statusError) Error() string            { return e.err.Error() }
+func (e statusError) Status() int              { return e.code }
 func newStatusError(code int, err error) error { return &statusError{code: code, err: err} }
 
 type handler struct {
