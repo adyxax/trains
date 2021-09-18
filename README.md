@@ -65,12 +65,12 @@ go build ./cmd/trains-webui/
 
 For a release build, use :
 ```
-go build -ldflags="-s -w" ./cmd/trains-webui/
+go build -ldflags '-s -w -extldflags "-static"' ./cmd/trains-webui/
 ```
 
 To cross-compile for another os or architecture, use :
 ```
-GOOS=openbsd GOARCH=amd64 go build -ldflags="-s -w" ./cmd/trains-webui/
+GOOS=openbsd GOARCH=amd64 go build -ldflags='-s -w -extldflags "-static"' ./cmd/trains-webui/
 ```
 
 ## Design Choices
