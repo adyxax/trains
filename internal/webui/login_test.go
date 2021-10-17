@@ -40,7 +40,7 @@ func TestLoginHandler(t *testing.T) {
 		input: httpTestInput{
 			method: http.MethodGet,
 			path:   "/login",
-			cookie: &http.Cookie{Name: sessionCookieName, Value: "graou"},
+			cookie: &http.Cookie{Name: sessionCookieName, Value: "invalid"},
 		},
 		expect: httpTestExpect{
 			code:       http.StatusOK,

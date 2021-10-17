@@ -58,13 +58,16 @@ func loginHandler(e *env, w http.ResponseWriter, r *http.Request) error {
 			if err != nil {
 				switch e := err.(type) {
 				case database.PasswordError:
-					// TODO : handle in page
+					// TODO log error
 					return e
 				case database.QueryError:
+					// TODO log error
 					return e
 				default:
+					// TODO log error
 					return e
 				}
+				// TODO display login form with error
 			}
 			token, err := e.dbEnv.CreateSession(user)
 			if err != nil {
